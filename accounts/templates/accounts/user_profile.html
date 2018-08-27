@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load bootstrap_tags %}
+
+{% block content %}
+
+<form>
+        
+        
+        
+        <p>{{profile.full_name}}</p>
+        
+        <p>{{profile.gender}}</p>
+        <p>{{ profile.country }}</p>
+        
+       
+        
+        <p><input class="btn btn-primary" type="submit"/></p>
+        
+    </form>
+
+
+{% endblock %}
