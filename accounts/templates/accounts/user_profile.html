@@ -9,7 +9,7 @@
                 
                 <p>{{request.user.profile.gender}}</p>
                 <p>{{ request.user.profile.country }}</p>
-                <a href="#" class="btn btn-default">Edit Profile</a>
+                <a href="{% url 'edit_profile' user.profile.id %}" class="btn btn-default">Edit Profile</a>
                 
         {% else %}
                 <p>Your profile is not yet complete, please click on the link below to complete your profile </p>

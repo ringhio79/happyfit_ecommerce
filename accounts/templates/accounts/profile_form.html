@@ -3,13 +3,17 @@
 
 {% block content %}
 
+<h4>Please complete your Profile</h4>
+<a href="{% url 'events_list' %}" class="btn btn-default">Complete Later</a>
+
+
 <form method="POST" enctype="multipart/form-data">
         
         {% csrf_token %}
         
         {{ profile_form | as_bootstrap }}
         
-        <p><input class="btn btn-primary" type="submit"/></p>
+        <p><input class="btn btn-primary" type="submit" value="Save"/></p>
         
     </form>
 

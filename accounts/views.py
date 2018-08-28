@@ -41,3 +41,21 @@ def add_profile(request):
 
 def user_profile(request):
     return render(request, "accounts/user_profile.html")
+    
+def edit_profile(request, id):
+    profile = get_object_or_404(Profile, pk=id)
+    
+    if request.method == "POST":
+        
+        profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if profile_form.is_valid():
+            profile_form.save()
+            return redirect("user_profile")
+        else:
+            return render(request, "accounts/profile_form.html", {"profile_form": profile_form})
+            
+    else:
+        profile_form = ProfileForm(instance=profile)
+        return render(request, "accounts/profile_form.html", {"profile_form": profile_form})
+    
+    

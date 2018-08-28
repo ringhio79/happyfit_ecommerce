@@ -18,7 +18,7 @@ from django.urls import path
 from events.views import events_list, event_details
 from django.urls import path, reverse_lazy
 from django.contrib.auth.views import login, logout, password_reset, password_reset_done, password_reset_confirm, password_reset_complete
-from accounts.views import register, add_profile, user_profile
+from accounts.views import register, add_profile, user_profile, edit_profile
 from django.conf.urls import url
 
 urlpatterns = [
@@ -38,6 +38,7 @@ urlpatterns = [
         {'post_reset_redirect': reverse_lazy('password_reset_complete'), 'template_name': 'accounts/password_reset_confirm.html'}, name='password_reset_confirm'),
     path('accounts/password-reset/complete/', password_reset_complete, {'template_name': 'accounts/password_reset_complete.html'}, name='password_reset_complete'),
     path('accounts/profile_form/', add_profile, name='add_profile'),
-    path('accounts/profile/', user_profile, name='user_profile')
+    path('accounts/profile/', user_profile, name='user_profile'),
+    path('accounts/edit_profile/<int:id>', edit_profile, name='edit_profile')
 
 ]
