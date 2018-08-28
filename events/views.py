@@ -15,6 +15,10 @@ def event_booking(request):
     id = request.GET["id"]
     event = get_object_or_404(Event, pk=id)
     quantity = int(request.GET["quantity"])
-    tickets = range(1, quantity + 1)
+    tickets = range(1, quantity)
     return render(request, "events/event_booking.html", {"tickets": tickets, "event": event, "quantity": quantity})
+
+def event_booking_confirm(request):
     
+    
+    return render(request, "events/booking_confirmation.html")

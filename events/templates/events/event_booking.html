@@ -5,12 +5,15 @@
 
 
 
-<form method="POST">
+<form method="POST" action="{% url 'booking_confirmation' %} ">
+    {% csrf_token %}
     
     <input type="hidden" name="id" value="{{event.id}}" />
+    
     <h4>{{event.event_name}} Quantity: {{quantity}}</h4>
     
     
+    <h5>Member name {{user.get_username}}</h5>
     
 <p>Please enter the Guest name</p>
     {% for ticket in tickets %}
