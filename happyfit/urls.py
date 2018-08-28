@@ -38,6 +38,6 @@ urlpatterns = [
         {'post_reset_redirect': reverse_lazy('password_reset_complete'), 'template_name': 'accounts/password_reset_confirm.html'}, name='password_reset_confirm'),
     path('accounts/password-reset/complete/', password_reset_complete, {'template_name': 'accounts/password_reset_complete.html'}, name='password_reset_complete'),
     path('accounts/profile_form/', add_profile, name='add_profile'),
-    path('accounts/profile/<int:id>/', user_profile, name='user_profile')
+    path('accounts/profile/', user_profile, name='user_profile')
 
 ]

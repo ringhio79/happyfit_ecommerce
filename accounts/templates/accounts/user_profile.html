@@ -4,15 +4,17 @@
 {% block content %}
 
 <form>
-        
-        <p>{{profile.full_name}}</p>
-        
-        <p>{{profile.gender}}</p>
-        <p>{{ profile.country }}</p>
-        
-       
-        
-        <p><input class="btn btn-primary" type="submit"/></p>
+        {% if request.user.profile %}
+                <p>{{request.user.profile.full_name}}</p>
+                
+                <p>{{request.user.profile.gender}}</p>
+                <p>{{ request.user.profile.country }}</p>
+                <a href="#" class="btn btn-default">Edit Profile</a>
+                
+        {% else %}
+                <p>Your profile is not yet complete, please click on the link below to complete your profile </p>
+                <a href="{% url 'add_profile' %}" class="btn btn-default">Add Profile</a>
+        {% endif%}
         
     </form>
 

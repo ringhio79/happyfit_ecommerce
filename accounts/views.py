@@ -24,20 +24,20 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'accounts/register.html', { 'form': form })
 
-def user_profile(request, id):
-    profile = get_object_or_404(Profile, pk=id)
-    return render(request, "accounts/user_profile.html", {'profile': profile})
-
 def add_profile(request):
     if request.method == "POST":
-        form = ProfileForm(request.POST, request.FILES)
-        if form.is_valid():
-            profile = form.save(commit=False)
-            form.save()
+        profile_form = ProfileForm(request.POST, request.FILES)
+        if profile_form.is_valid():
+            profile = profile_form.save(commit=False)
+            profile.user = request.user
+            profile.save()
             return redirect("events_list")
         else:
-            return render(request, "accounts/profile_form.html", {"form": form})
+            return render(request, "accounts/profile_form.html", {"profile_form": profile_form})
             
     else:
-        form=ProfileForm()
-        return render(request, "accounts/profile_form.html", {"form": form})
+        profile_form=ProfileForm()
+        return render(request, "accounts/profile_form.html", {"profile_form": profile_form})
+
+def user_profile(request):
+    return render(request, "accounts/user_profile.html")
