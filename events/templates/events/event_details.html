@@ -1,11 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>
-    {{ event.event_name}}
-    </h2>
-    <p> {{event.description}}</p>
-    <p> {{event.date}}</p>
-    <p> {{event.capacity}}</p>
+
+<div class="row">
+
+        <div class="col-lg-12">
+
+          <div class="card mt-4">
+            <img width="500" height="500" class="card-img-top img-fluid" src="{{MEDIA_URL}}{{event.image}}" alt="">
+            <div class="card-body">
+              <h3 class="card-title">{{event.event_name}}</h3>
+              
+              <p class="card-text">{{event.description}}</p>
+              <p> On: {{event.date}}</p>
+              <p> Spaces available: {{event.capacity}}</p>
+              <h4>€{{event.price}}</h4>
+              </div>
+          </div>
+          <!-- /.card -->
+          
+          <div>
+            <form action="{% url 'event_booking' %}">
+              
+              <input type="hidden" name="id" value="{{event.id}}"/>
+              <p>Quantity: <input type="text" name="quantity" value="1"/></p>
+              <input class="btn btn-success" type="submit" value="Add to booking"/>
+            </form>
+          </div>
+          
+        </div>
+
+
 
 {% endblock %}

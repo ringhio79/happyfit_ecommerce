@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block content %}
+
+<h3>event booking page</h3>
+
+
+
+
+<form method="POST">
+    
+    <input type="hidden" name="id" value="{{event.id}}" />
+    <h4>{{event.event_name}} Quantity: {{quantity}}</h4>
+    
+    
+    
+<p>Please enter the Guest name</p>
+    {% for ticket in tickets %}
+    <p>Guest {{ticket}}:</p>
+    <p>First name: <input type="text" name="first_name_{{ticket}}"></p>
+    <p>Last name: <input type="text" name="last_name_{{ticket}}"></p>
+    {% endfor %}
+
+    <input class="btn btn-success" type="submit" value="Confirm/Purchase" />
+</form>
+
+
+{% endblock %}

@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from events.views import events_list, event_details
+from django.views.static import serve
+from django.conf import settings
+from events.views import events_list, event_details, event_booking
 from django.urls import path, reverse_lazy
 from django.contrib.auth.views import login, logout, password_reset, password_reset_done, password_reset_confirm, password_reset_complete
 from accounts.views import register, add_profile, user_profile, edit_profile
@@ -25,6 +27,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', events_list, name="events_list"),
     path('<int:id>', event_details, name="event_details"),
+    path('event/book', event_booking, name="event_booking"),
+    
+
     
     path('accounts/register/', register, name='register'),
 	    
@@ -39,6 +44,6 @@ urlpatterns = [
     path('accounts/password-reset/complete/', password_reset_complete, {'template_name': 'accounts/password_reset_complete.html'}, name='password_reset_complete'),
     path('accounts/profile_form/', add_profile, name='add_profile'),
     path('accounts/profile/', user_profile, name='user_profile'),
-    path('accounts/edit_profile/<int:id>', edit_profile, name='edit_profile')
-
+    path('accounts/edit_profile/<int:id>', edit_profile, name='edit_profile'),
+    path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
