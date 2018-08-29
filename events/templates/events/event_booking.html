@@ -9,8 +9,17 @@
     {% csrf_token %}
     
     <input type="hidden" name="id" value="{{event.id}}" />
+    <input type="hidden" name="user_id" value="{{user.id }}" />
+    <input type="hidden" name="ticket_quantity" value="{{quantity }}"
     
-    <h4>{{event.event_name}} Quantity: {{quantity}}</h4>
+    
+    
+    
+    <h4>{{event.event_name}} </h4>
+    <p> Quantity: {{quantity}}</p>
+    <p> Unit Price: {{event.price}}</p>
+    <p> Grand Total: {{grand_total}}</p>
+    
     
     
     <h5>Member name {{user.get_username}}</h5>
