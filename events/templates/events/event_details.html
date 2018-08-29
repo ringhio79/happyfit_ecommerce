@@ -13,21 +13,35 @@
               
               <p class="card-text">{{event.description}}</p>
               <p> On: {{event.date}}</p>
-              <p> Spaces available: {{event.capacity}}</p>
+              <p> Capacity: {{event.capacity}}</p>
+              <p> Available: {{available}}</p>
               <h4>€{{event.price}}</h4>
               </div>
           </div>
-          <!-- /.card -->
+          {% if user.is_autheticated %}
+          {% else %}
+          {% endif %}
+          {% if user.profile %}
           
           <div>
             <form action="{% url 'event_booking' %}">
               
               <input type="hidden" name="id" value="{{event.id}}"/>
-              <p>Quantity: <input type="text" name="quantity" value="1"/></p>
+              <p>Quantity: <input type="number" name="quantity" min="1" max="{{available}}"></p>
+              
+              
+              
+              {% if can_book %}
               <input class="btn btn-success" type="submit" value="Add to booking"/>
+              {% else %}
+              <a href="{%  url 'events_list' %}" class="btn btn-success" role="button">Fully Booked Back</a>
+              {% endif %}
             </form>
           </div>
-          
+          {% else %}
+          <a href="{% url 'add_profile' %}" class="btn btn-success" role="button">please complete your profile</a>
+          {% endif %}
+          <br>
         </div>
 
 

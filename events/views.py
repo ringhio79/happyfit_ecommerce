@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Event, Ticket
 from .utils import create_ticket
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -10,8 +11,14 @@ def events_list(request):
 
 def event_details(request, id):
     event = get_object_or_404(Event, pk=id)
-    return render(request, "events/event_details.html", {"event": event})
+    tickets = Ticket.objects.filter(event=event)
+    available = event.capacity - len(tickets)
     
+    can_book = available >=1
+    
+    return render(request, "events/event_details.html", {"event": event, "available": available, "can_book": can_book})
+    
+@login_required()
 def event_booking(request):
     id = request.GET["id"]
     event = get_object_or_404(Event, pk=id)
@@ -25,8 +32,10 @@ def event_booking_confirm(request):
     event = request.POST['id']
     quantity = int(request.POST["ticket_quantity"])
     guests = range(1, quantity)
+    member_first_name = request.user.profile.first_name
+    member_last_name = request.user.profile.last_name
     
-    create_ticket(member, event, "Annie", "Admin" )
+    create_ticket(member, event, member_first_name, member_last_name)
     for guest in guests:
        
         first_name = request.POST['first_name_'+str(guest)]
