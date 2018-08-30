@@ -42,7 +42,7 @@
             <div>
             <form action="{% url 'event_booking' %}">
               
-              <a href="{% url 'add_profile' %}" class="btn btn-success" role="button">please complete your profile</a>
+              <a href="{% url 'add_profile' %}?next={{request.path}}" class="btn btn-success" role="button">please complete your profile</a>
               
             </form>
           </div>
@@ -53,28 +53,5 @@
           {% endif %}
          
           
-        <!--  {% if user.profile%}-->
-        <!--  <div>-->
-        <!--    <form action="{% url 'event_booking' %}">-->
-              
-        <!--      <input type="hidden" name="id" value="{{event.id}}"/>-->
-        <!--      <p>Quantity: <input type="number" name="quantity" min="1" max="{{available}}"></p>-->
-              
-              
-              
-        <!--      {% if can_book %}-->
-        <!--      <input class="btn btn-success" type="submit" value="Add to booking"/>-->
-        <!--      {% else %}-->
-        <!--      <a href="{%  url 'events_list' %}" class="btn btn-success" role="button">Fully Booked Back</a>-->
-        <!--      {% endif %}-->
-        <!--    </form>-->
-        <!--  </div>-->
-        <!--  {% else %}-->
-        <!--  <a href="{% url 'add_profile' %}" class="btn btn-success" role="button">please complete your profile</a>-->
-        <!--  {% endif %}-->
-        <!--  <br>-->
-        <!--</div>-->
-
-
-
+        
 {% endblock %}

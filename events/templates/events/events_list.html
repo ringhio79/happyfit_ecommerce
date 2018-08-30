@@ -3,6 +3,10 @@
 {% block content %}
 
 
+<h4><a href="{% url 'subscriptions' %}">choose a subscription</a></h4>
+
+
+
 {% for event in events %}
 <h4><a href="{% url 'event_details' event.id %}">{{event.event_name}}</a>
 {% endfor %}

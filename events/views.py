@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Event, Ticket
 from .utils import create_ticket
 from django.contrib.auth.decorators import login_required
@@ -28,21 +28,25 @@ def event_booking(request):
     return render(request, "events/event_booking.html", {"tickets": tickets, "event": event, "quantity": quantity, "grand_total": grand_total})
 
 def event_booking_confirm(request):
-    member = request.POST['user_id']
-    event = request.POST['id']
-    quantity = int(request.POST["ticket_quantity"])
-    guests = range(1, quantity)
-    member_first_name = request.user.profile.first_name
-    member_last_name = request.user.profile.last_name
-    
-    create_ticket(member, event, member_first_name, member_last_name)
-    for guest in guests:
-       
-        first_name = request.POST['first_name_'+str(guest)]
-        last_name = request.POST['last_name_'+str(guest)]
-      
-        create_ticket(member, event, first_name, last_name )
+    if request.method == "GET":
+        return redirect('/')
+    else:
+        member = request.POST['user_id']
+        event = request.POST['id']
+        quantity = int(request.POST["ticket_quantity"])
+        guests = range(1, quantity)
+        member_first_name = request.user.profile.first_name
+        member_last_name = request.user.profile.last_name
         
-    return render(request, "events/booking_confirmation.html")
+        create_ticket(member, event, member_first_name, member_last_name)
+        for guest in guests:
+           
+            first_name = request.POST['first_name_'+str(guest)]
+            last_name = request.POST['last_name_'+str(guest)]
+          
+            create_ticket(member, event, first_name, last_name )
+            
+        return render(request, "events/booking_confirmation.html")
+    
 
 

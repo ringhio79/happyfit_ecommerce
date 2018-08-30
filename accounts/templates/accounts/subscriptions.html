@@ -2,17 +2,20 @@
 {% load bootstrap_tags %}
 
 {% block content %}
-
+<h3>Pay a year in advance and get 2 months free!!</h3>
 <form method="POST" action='{% url 'subscribe' %}'>
     {% csrf_token %}
     <input type="hidden" value="MEMBERSHIP-YEARLY" name="plan"/>
-    <input type="submit" value="Annual €990.00"/>
+    <input type="submit" value="Annual €100.00"/>
 </form>
 
+<hr>
+
+<h3>Flexible monthly payment plan</h3>
 <form method="POST" action='{% url 'subscribe' %}'>
     {% csrf_token %}
     <input type="hidden" value="MEMBERSHIP_MONTHLY" name="plan"/>
-    <input type="submit" value="Montly €9.99"/>
+    <input type="submit" value="Montly €10.00"/>
 </form>
 
 

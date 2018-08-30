@@ -1,6 +1,6 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse, HttpResponseRedirect
 from .forms import ProfileForm
 from payments.forms import CardForm
 from .models import Profile
@@ -30,6 +30,7 @@ def register(request):
     return render(request, 'accounts/register.html', { 'form': form })
 
 def add_profile(request):
+    redirect_to = request.GET.get('next', '/')
     if request.method == "POST":
         profile_form = ProfileForm(request.POST, request.FILES)
         card_form = CardForm(request.POST)
@@ -45,7 +46,8 @@ def add_profile(request):
                 )
             profile.stripe_id = customer.id
             profile.save()
-            return redirect('events_list')
+            return redirect(redirect_to)
+            
         else:
             print(card_form.errors)
             return render(request, "accounts/profile_form.html", {"profile_form": profile_form, "card_form": card_form, "publishable": settings.STRIPE_PUBLISHABLE_KEY})
@@ -56,7 +58,8 @@ def add_profile(request):
         return render(request, "accounts/profile_form.html", {"profile_form": profile_form, "card_form": card_form, "publishable": settings.STRIPE_PUBLISHABLE_KEY})
 
 def user_profile(request):
-    return render(request, "accounts/user_profile.html")
+    membership_no = "%05d" % request.user.profile.id
+    return render(request, "accounts/user_profile.html", {"membership_no": membership_no})
     
 def edit_profile(request, id):
     profile = get_object_or_404(Profile, pk=id)
@@ -75,6 +78,19 @@ def edit_profile(request, id):
         return render(request, "accounts/profile_form.html", {"profile_form": profile_form})
         
 def subscriptions(request):
-    return render (request, "accounts/subscriptions.html")
+    return render(request, "accounts/subscriptions.html")
+    
+def subscribe(request):
+    
+    if request.method == "POST":
+        plan = request.POST['plan']
+        
+        subscription = stripe.Subscription.create(
+          customer=request.user.profile.stripe_id,
+          items=[{'plan': plan}],
+        )
+        return redirect('events_list')
+    else:
+        return render(request, 'checkout/subscribe.html')
     
     
