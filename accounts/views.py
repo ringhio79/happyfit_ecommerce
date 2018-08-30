@@ -1,7 +1,7 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse, HttpResponseRedirect
-from .forms import ProfileForm
+from .forms import ProfileForm, UserRegForm
 from payments.forms import CardForm
 from .models import Profile
 from django.conf import settings
@@ -12,7 +12,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 def register(request):
     if request.method == 'POST':
         # Load the HTTP Request into two forms, for the User, and the Profile
-        form = UserCreationForm(request.POST)
+        form = UserRegForm(request.POST)
 
         if form.is_valid():
             # Save the User object to DB, by calling save directly on the Form.
@@ -26,7 +26,7 @@ def register(request):
             login(request, user)
             return redirect('add_profile')
     else:
-        form = UserCreationForm()
+        form = UserRegForm()
     return render(request, 'accounts/register.html', { 'form': form })
 
 def add_profile(request):
