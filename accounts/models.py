@@ -19,7 +19,7 @@ class Profile(models.Model):
     street_address_1 = models.CharField(max_length=40, blank=False)
     street_address_2 = models.CharField(max_length=40, blank=True)
     county = models.CharField(max_length=40, blank=True)
-    
+    stripe_id = models.CharField(max_length=80, blank=True, null=True)
     
     def __str__(self):
         return self.user.username + ' Profile'

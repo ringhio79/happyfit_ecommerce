@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load bootstrap_tags %}
+
+{% block content %}
+
+<form method="POST" action='{% url 'subscribe' %}'>
+    {% csrf_token %}
+    <input type="hidden" value="MEMBERSHIP-YEARLY" name="plan"/>
+    <input type="submit" value="Annual €990.00"/>
+</form>
+
+<form method="POST" action='{% url 'subscribe' %}'>
+    {% csrf_token %}
+    <input type="hidden" value="MEMBERSHIP_MONTHLY" name="plan"/>
+    <input type="submit" value="Montly €9.99"/>
+</form>
+
+
+{% endblock %}

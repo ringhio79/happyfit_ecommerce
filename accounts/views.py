@@ -1,8 +1,13 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .forms import ProfileForm
+from payments.forms import CardForm
 from .models import Profile
+from django.conf import settings
+import stripe
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def register(request):
     if request.method == 'POST':
@@ -27,17 +32,28 @@ def register(request):
 def add_profile(request):
     if request.method == "POST":
         profile_form = ProfileForm(request.POST, request.FILES)
-        if profile_form.is_valid():
+        card_form = CardForm(request.POST)
+        print(card_form.is_valid())
+        if profile_form.is_valid() and card_form.is_valid():
             profile = profile_form.save(commit=False)
             profile.user = request.user
+            
+            token=card_form.cleaned_data['stripe_id']
+            customer = stripe.Customer.create(
+                source=token,
+                email='admin@example.com',
+                )
+            profile.stripe_id = customer.id
             profile.save()
-            return redirect("events_list")
+            return redirect('events_list')
         else:
-            return render(request, "accounts/profile_form.html", {"profile_form": profile_form})
+            print(card_form.errors)
+            return render(request, "accounts/profile_form.html", {"profile_form": profile_form, "card_form": card_form, "publishable": settings.STRIPE_PUBLISHABLE_KEY})
             
     else:
+        card_form = CardForm()
         profile_form=ProfileForm()
-        return render(request, "accounts/profile_form.html", {"profile_form": profile_form})
+        return render(request, "accounts/profile_form.html", {"profile_form": profile_form, "card_form": card_form, "publishable": settings.STRIPE_PUBLISHABLE_KEY})
 
 def user_profile(request):
     return render(request, "accounts/user_profile.html")
@@ -57,5 +73,8 @@ def edit_profile(request, id):
     else:
         profile_form = ProfileForm(instance=profile)
         return render(request, "accounts/profile_form.html", {"profile_form": profile_form})
+        
+def subscriptions(request):
+    return render (request, "accounts/subscriptions.html")
     
     
