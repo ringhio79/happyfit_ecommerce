@@ -1,6 +1,6 @@
 from .base import *
 
-ALLOWED_HOSTS = ['ecommerce-gigi108.c9users.io']
+ALLOWED_HOSTS = ['happyfit-gigi108.c9users.io']
 
 DATABASES = {
     'default': {

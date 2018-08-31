@@ -1,7 +1,7 @@
 from .base import *
 import dj_database_url
 
-ALLOWED_HOSTS = ['ringhioecommerce.herokuapp.com', 'ringhio79-lay-z-gym.herokuapp.com']
+ALLOWED_HOSTS = ['happyfit-gigi108.c9users.io', 'ringhio79-lay-z-gym.herokuapp.com']
 
 
 DATABASES = {

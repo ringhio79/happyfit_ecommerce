@@ -10,6 +10,12 @@
                 <p>{{request.user.profile.gender}}</p>
                 <p>{{ request.user.profile.country }}</p>
                 <p>membership no. {{ membership_no }}</p>
+                <p> you are subscribed to: {{subscription.plan.id}}</p>
+                <p> subscription end date {{end_date}}</p>
+              
+                <a href="{% url 'unsubscribe' %}" class="btn btn-default">Cancel subscription</a>
+                <a href="{% url 'view_subscription' %}" class="btn btn-default">Subscription Detail</a>
+                
                 <a href="{% url 'edit_profile' user.profile.id %}" class="btn btn-default">Edit Profile</a>
                 
         {% else %}

@@ -20,7 +20,7 @@ from django.conf import settings
 from events.views import events_list, event_details, event_booking, event_booking_confirm
 from django.urls import path, reverse_lazy
 from django.contrib.auth.views import login, logout, password_reset, password_reset_done, password_reset_confirm, password_reset_complete
-from accounts.views import register, add_profile, user_profile, edit_profile, subscriptions, subscribe
+from accounts.views import register, add_profile, user_profile, edit_profile, subscriptions, subscribe, unsubscribe,view_subscription
 from django.conf.urls import url
 
 urlpatterns = [
@@ -47,6 +47,8 @@ urlpatterns = [
     path('accounts/edit_profile/<int:id>', edit_profile, name='edit_profile'),
     path('subscriptions', subscriptions, name='subscriptions'),
     path('subscribe', subscribe, name='subscribe'),
+    path('unsubscribe', unsubscribe, name='unsubscribe'),
+    path('view_subscription', view_subscription, name='view_subscription'),
     
     path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
