@@ -1,6 +1,6 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .forms import ProfileForm, UserRegForm
 from payments.forms import CardForm
 from .models import Profile
@@ -12,15 +12,10 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def register(request):
     if request.method == 'POST':
-        # Load the HTTP Request into two forms, for the User, and the Profile
         form = UserRegForm(request.POST)
 
         if form.is_valid():
-            # Save the User object to DB, by calling save directly on the Form.
-            # Return the User object so that we can use it later to set the user of the Profile.
             user = form.save()
-            
-            # Now we can log in as the new user 
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
@@ -67,30 +62,33 @@ def user_profile(request):
 def edit_profile(request, id):
     profile = get_object_or_404(Profile, pk=id)
     
-    if request.method == "POST":
-        
-        profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
-        card_form = CardForm(request.POST)
-        if profile_form.is_valid() and card_form.is_valid():
-            profile = profile_form.save(commit=False)
-            profile.user = request.user
-            
-            token=card_form.cleaned_data['stripe_id']
-            customer = stripe.Customer.create(
-                source=token,
-                email=request.user.email,
-                )
-            profile.stripe_id = customer.id
-            profile.save()
-            return redirect("user_profile")
-        else:
-            return render(request, "accounts/profile_form.html", {"profile_form": profile_form, "card_form": card_form, "publishable": settings.STRIPE_PUBLISHABLE_KEY})
-            
-            
+    if request.user.profile.id != profile.id:
+        return HttpResponse("You are not authorised to view this page")
     else:
-        profile_form = ProfileForm(instance=profile)
-        card_form = CardForm()
-        return render(request, "accounts/profile_form.html", {"profile_form": profile_form, "card_form": card_form, "publishable": settings.STRIPE_PUBLISHABLE_KEY})
+        if request.method == "POST":
+            
+            profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
+            card_form = CardForm(request.POST)
+            if profile_form.is_valid() and card_form.is_valid():
+                profile = profile_form.save(commit=False)
+                profile.user = request.user
+                
+                token=card_form.cleaned_data['stripe_id']
+                customer = stripe.Customer.create(
+                    source=token,
+                    email=request.user.email,
+                    )
+                profile.stripe_id = customer.id
+                profile.save()
+                return redirect("user_profile")
+            else:
+                return render(request, "accounts/profile_form.html", {"profile_form": profile_form, "card_form": card_form, "publishable": settings.STRIPE_PUBLISHABLE_KEY})
+                
+                
+        else:
+            profile_form = ProfileForm(instance=profile)
+            card_form = CardForm()
+            return render(request, "accounts/profile_form.html", {"profile_form": profile_form, "card_form": card_form, "publishable": settings.STRIPE_PUBLISHABLE_KEY})
         
 def subscriptions(request):
     return render(request, "accounts/subscriptions.html")

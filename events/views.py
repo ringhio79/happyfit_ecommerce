@@ -11,6 +11,9 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 # Create your views here.
+def home(request):
+    return render(request, "events/home.html")
+
 def events_list(request):
     events = Event.objects.all()
     return render(request, "events/events_list.html", {'events': events})
@@ -45,15 +48,12 @@ def event_booking_confirm(request):
         member_first_name = request.user.profile.first_name
         member_last_name = request.user.profile.last_name
         total_in_cent = int(float(request.POST["grand_total"]))*100
-
-        print(total_in_cent)
         
         charge = stripe.Charge.create(
             amount=total_in_cent,
             currency='EUR',
             customer=request.user.profile.stripe_id,
             )
-        
         
         if charge.paid:
             
@@ -65,7 +65,8 @@ def event_booking_confirm(request):
               
                 create_ticket(member, event, first_name, last_name )
                 
-            return render(request, "events/booking_confirmation.html")
+                
+            return render(request, "events/booking_confirmation.html", {"member_first_name": first_name, "member_last_name": member_last_name, "quantity": quantity, "event":event})
         
         else:
             return HttpResponse("Charge Not Paid")

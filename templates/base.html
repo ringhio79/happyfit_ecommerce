@@ -2,58 +2,69 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cerulean/bootstrap.min.css">
-       <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    
-    
-    {% block head_js %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-   {% endblock %}
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  
+<!-------------fonts & icons---------------->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  
+  <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+  
+<!-------------style & Layout ---------------->  
+  <link href="https://stackpath.bootstrapcdn.com/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" integrity="sha384-pVJelSCJ58Og1XDc2E95RVYHZDPb9AVyXsI8NoVpB2xmtxoZKJePbMfE4mlXw7BJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+
+<!-------------scripts---------------->
+  {% block head_js %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  {% endblock %}
+
 </head>
+
 <body>
-    
-    
-<nav class="navbar navbar-masthead navbar-default navbar-fixed-top">
-    <div class="container">
+
+  <nav class="navbar navbar-default navbar-fixed-top " role="navigation">
+    <div class="container-fluid">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">Welcome to Happy Fit {{ user.get_username }}</a>
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <a class="navbar-brand" href="{% url 'home' %}"><i class="fas fa-dumbbell"></i> Lay-Z-gym <i class="fas fa-dumbbell"></i> {{ user.get_username }}</a>
       </div>
-      
-      <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          {% if user.is_authenticated %}
-            <li><a href="{% url 'user_profile' %}"><i class="fa fa-user"></i> Profile</a></li>
-            <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Log Out</a></li>
-          {% else %}
-            <li><a href="{% url 'register' %}"><i class="fa fa-user-plus"></i> Register</a></li>
-            <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Log In</a></li>
-          {% endif %}
-          <li><a href="#"><i class="fa fa-shopping-cart"></i> Cart            
-            <label class="badge badge-light">{{ number_of_items_in_cart }}</label></a>
+
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="nav navbar-nav">
+          <li><a href="{% url 'home' %}">HOME</a></li>
+          <li><a href="{% url 'subscriptions' %}">SUBSCRIPTIONS</a></li>
+          <li><a href="{% url 'events_list' %}">EVENTS</a></li>
+          <li><a href="#">INSTRUCTORS</a></li>
+          <li class="pull-right dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Account <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              {% if user.is_authenticated %}
+              <li><a href="{% url 'user_profile' %}"><i class="far fa-user"></i> Profile</a></li>
+              <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
+              {% else %}
+              <li><a href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Register</a></li>
+              <li><a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
+              {% endif %}
+            </ul>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  
-  <div class="container">
+
   {% block content %} {% endblock %}
-    </div>
-    
+
 </body>
+
 </html>
