@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+
+{% block home %}
 
 <div class="row home-image">
     <img src="../static/media/images/boxing-B&W (1).jpg" height="470px" width="100%"></img>
@@ -6,30 +8,33 @@
         <h1>It hurts now but <br> one day it will be <br><span style="color:#D34615">your warmup!!</span></h1>
     </div>
 </div>
+{% endblock%}
 
+{% block content %}
 <div class="row home-parent">
     <div class="col-sm-12 col-md-4 home-col border">
         <img src="../static/media/images/membership.png" alt="subscriptions" height="75px" width="75px">
-        <h4>subscriptions</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci incidunt hic ex nobis, voluptatem, sequi, quas quisquam numquam temporibus corporis veritatis aliquam officia quae accusantium nesciunt fugiat officiis rerum. Illo fugit eos ullam,
-            labore ipsa harum, nemo dignissimos alias quia error voluptatum et, dicta expedita quisquam, maiores voluptates? Assumenda, culpa?</p>
+        <h4>membership</h4>
+        <p>Our flexible subscription options allow you to choose the right plan for your needs.  Whether you are an avid fitness junky, a busy mum looking to fit some classes around your busy schedule or a regular gym go-er we have the right plan for you. Please click on the link below for further information on each of our subscription options. </p>
         <a href="#" class="btn btn-secondary" role="button">subscriptions</a>
     </div>
     <div class="col-sm-12 col-md-4 home-col border">
         <img src="../static/media/images/calendar.png" alt="events" height="75px" width="75px">
         <h4>events</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci incidunt hic ex nobis, voluptatem, sequi, quas quisquam numquam temporibus corporis veritatis aliquam officia quae accusantium nesciunt fugiat officiis rerum. Illo fugit eos ullam,
-            labore ipsa harum, nemo dignissimos alias quia error voluptatum et, dicta expedita quisquam, maiores voluptates? Assumenda, culpa?</p>
+        <p>Our classes and events are exclusively available to members and their guests.  We have a variety of fitness classes covering strength and body toning, cardio vascular exercise classes including dance classes and more relaxing offering with yoga, pilates and meditation yoga. For more information on the classes held and the running schedule of events please follow the link below. </p>
         <a href="{% url 'events_list' %}" class="btn btn-secondary" role="button">events</a>
     </div>
     <div class="col-sm-12 col-md-4 home-col">
         <img src="../static/media/images/runner-stick-man.png" alt="membership" height="75px" width="75px">
         <h4>about</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci incidunt hic ex nobis, voluptatem, sequi, quas quisquam numquam temporibus corporis veritatis aliquam officia quae accusantium nesciunt fugiat officiis rerum. Illo fugit eos ullam,
-            labore ipsa harum, nemo dignissimos alias quia error voluptatum et, dicta expedita quisquam, maiores voluptates? Assumenda, culpa?</p>
+        <p>Lay-Z-gym was founded by Raoul Hurst with an aim to make exercising less of a chore and more of a social experience.  Our instructors and trainers do their utmost to make you feel comfortable and to help you tailor your exercise regime to your specific needs while leaving all judgements at the door.  Join us and get to know a little more about each instructor.</p>
         <a href="{% url 'events_list' %}" class="btn btn-secondary" role="button">about us</a>
     </div>
 </div>
+
+<hr>
+
+<div>sponsors/partners</div>
 
 
 {% endblock %}

@@ -53,11 +53,15 @@ def add_profile(request):
         return render(request, "accounts/profile_form.html", {"profile_form": profile_form, "card_form": card_form, "publishable": settings.STRIPE_PUBLISHABLE_KEY})
 
 def user_profile(request):
-    membership_no = "%05d" % request.user.profile.id
-    subscription = stripe.Subscription.retrieve(request.user.profile.subscription_id)
-    end_date_str = subscription.current_period_end
-    end_date = datetime.datetime.fromtimestamp(float(end_date_str))
-    return render(request, "accounts/user_profile.html", {"membership_no": membership_no, "subscription":subscription, "end_date":end_date})
+    try:
+        hasattr ("request.user", "profile")
+        membership_no = "%05d" % request.user.profile.id
+        subscription = stripe.Subscription.retrieve(request.user.profile.subscription_id)
+        end_date_str = subscription.current_period_end
+        end_date = datetime.datetime.fromtimestamp(float(end_date_str))
+        return render(request, "accounts/user_profile.html", {"membership_no": membership_no, "subscription":subscription, "end_date":end_date})
+    except:
+        return render(request, "accounts/user_profile.html")
     
 def edit_profile(request, id):
     profile = get_object_or_404(Profile, pk=id)
