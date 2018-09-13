@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'events',
     'payments',
     'storages',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [

@@ -13,5 +13,5 @@ class UserRegForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model=Profile
-        fields=['first_name', 'last_name', 'image', 'gender', 'street_address_1', 'street_address_2','town_or_city', 'postcode', 'county', 'country']
+        fields=['first_name', 'last_name', 'profile_image', 'gender', 'house_no', 'street_name','town_or_city', 'postcode', 'county', 'country']
         

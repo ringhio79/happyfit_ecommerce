@@ -51,10 +51,10 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Hi {{ user.get_username }} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
              
-              <li><a href="{% url 'user_profile' %}"><i class="far fa-user"></i> Profile</a></li>
+              <li><a href="{% url 'user_profile' %}"><i class="far fa-user"></i> Account</a></li>
               <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
               {% else %}
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Account <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Hello, Sign-in <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Register</a></li>
               <li><a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Log In</a></li>

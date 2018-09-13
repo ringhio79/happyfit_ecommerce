@@ -2,15 +2,15 @@
 
 {% block content %}
 
-<div class="panel panel-warning">
+<div class="panel panel-success">
         <div class="panel-heading">
-                <h3 class="panel-title">{{ user.get_username }} Profile</h3>
+                <h3 class="panel-title">Member Profile: {{ user.get_username }}</h3>
         </div>
         <div class="panel-body">
                 {% if request.user.profile %}
                         <div class="row">
                                 <div class="col-sm-12 col-md-6 profile-three">
-                                        <img class="img-profile" src="{{MEDIA_URL}}{{request.user.profile.image}}">
+                                        <img class="img-profile" src="{{MEDIA_URL}}{{request.user.profile.profile_image}}">
                                         <p>Membership no. {{ membership_no }}</p>
                                         {% if request.user.profile.subscription_id %}
                                         <p> you are subscribed to: {{subscription.plan.id}}</p>
@@ -29,9 +29,8 @@
                                 </div>
                                 <div class="col-sm-12 col-md-4 profile-two">
                                         <p>{{ request.user.profile.first_name }} {{ request.user.profile.last_name }}</p>
-                                        <p>member no. {{membership_no}}</p>
                                         <p>{{ request.user.profile.gender }}</p>
-                                        <p>{{ request.user.profile.street_address_1 }}<br>{{ request.user.profile.street_address_2 }}<br>{{ request.user.profile.town_or_city }}<br>{{ request.user.profile.postcode }}<br>{{ request.user.profile.country }}</p>
+                                        <p>{{ request.user.profile.house_no }}<br>{{ request.user.profile.street_name }}<br>{{ request.user.profile.town_or_city }}<br>{{ request.user.profile.postcode }}<br>{{ request.user.profile.country }}</p>
                                         <a href="{% url 'edit_profile' user.profile.id %}" class="btn btn-default">Edit Profile</a>
                                 </div>
                                         
