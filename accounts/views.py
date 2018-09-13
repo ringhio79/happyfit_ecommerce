@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .forms import ProfileForm, UserRegForm
 from payments.forms import CardForm
 from .models import Profile
+from events.models import Ticket, Event
 from django.conf import settings
 import datetime
 import stripe
@@ -52,16 +53,45 @@ def add_profile(request):
         profile_form=ProfileForm()
         return render(request, "accounts/profile_form.html", {"profile_form": profile_form, "card_form": card_form, "publishable": settings.STRIPE_PUBLISHABLE_KEY})
 
+# --------------using event table--------------------------
 def user_profile(request):
-    try:
-        hasattr ("request.user", "profile")
+    if hasattr(request.user, "profile"):
         membership_no = "%05d" % request.user.profile.id
-        subscription = stripe.Subscription.retrieve(request.user.profile.subscription_id)
-        end_date_str = subscription.current_period_end
-        end_date = datetime.datetime.fromtimestamp(float(end_date_str))
-        return render(request, "accounts/user_profile.html", {"membership_no": membership_no, "subscription":subscription, "end_date":end_date})
-    except:
+        member = request.user.id
+        tickets = Ticket.objects.filter(member=member)
+       
+        if request.user.profile.subscription_id:
+            
+            subscription = stripe.Subscription.retrieve(request.user.profile.subscription_id)
+            end_date_str = subscription.current_period_end
+            end_date = datetime.datetime.fromtimestamp(float(end_date_str))
+            
+            return render(request, "accounts/user_profile.html", {"membership_no": membership_no, "subscription":subscription, "end_date":end_date, "member": member, "tickets":tickets})
+        else: 
+            
+            return render(request, "accounts/user_profile.html", {"membership_no": membership_no, "member": member, "tickets": tickets})
+    else:
         return render(request, "accounts/user_profile.html")
+
+
+# --------------using ticket table--------------------------
+# def user_profile(request):
+#     if hasattr(request.user, "profile"):
+#         membership_no = "%05d" % request.user.profile.id
+#         member = request.user.id
+#         tickets = Ticket.objects.filter(member=member)
+#         if request.user.profile.subscription_id:
+            
+#             subscription = stripe.Subscription.retrieve(request.user.profile.subscription_id)
+#             end_date_str = subscription.current_period_end
+#             end_date = datetime.datetime.fromtimestamp(float(end_date_str))
+            
+#             return render(request, "accounts/user_profile.html", {"membership_no": membership_no, "subscription":subscription, "end_date":end_date, "member": member, "tickets": tickets})
+#         else: 
+            
+#             return render(request, "accounts/user_profile.html", {"membership_no": membership_no, "member": member, "tickets": tickets})
+#     else:
+#         return render(request, "accounts/user_profile.html")
     
 def edit_profile(request, id):
     profile = get_object_or_404(Profile, pk=id)

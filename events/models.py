@@ -26,6 +26,6 @@ class Ticket(models.Model):
     event = models.ForeignKey(Event, related_name='tickets', null=False, default=1, on_delete=models.SET_DEFAULT)
     
     def __str__(self):
-        return self.event.event_name
+        return self.member.username
         
         
