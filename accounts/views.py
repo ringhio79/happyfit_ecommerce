@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .forms import ProfileForm, UserRegForm
 from payments.forms import CardForm
 from .models import Profile
-from events.models import Ticket, Event
+from events.models import Ticket, Event, Booking
 from django.conf import settings
 import datetime
 import stripe

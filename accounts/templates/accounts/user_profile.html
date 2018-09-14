@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="panel panel-success">
+<div class="panel panel-warning">
         <div class="panel-heading">
                 <h3 class="panel-title">Member Profile: {{ user.get_username }}</h3>
         </div>
@@ -44,10 +44,15 @@
         </div>
         <hr class="hr-style">
         <div class="container">
+                
+                
         {% for ticket in tickets%}
-        <p>Event: {{ticket.event.event_name}} Member: {{ticket.member}}</p>
-        <p>Ticket No. {{ticket.id}} Participant: {{ticket.first_name}} {{ticket.last_name}}</p>
-        <hr>                
+                {% if ticket.booking.id == ticket.booking.id %}
+                <p>booking no. {{ticket.booking.id}}</p>
+                <p>Event: {{ticket.event.event_name}} Member: {{ticket.member}}</p>
+                <p>Ticket No. {{ticket.id}} Participant: {{ticket.first_name}} {{ticket.last_name}}</p>
+                {% endif%}
+                
         {% endfor%}
         
         </div>
