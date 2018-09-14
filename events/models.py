@@ -20,11 +20,11 @@ class Event(models.Model):
         return self.event_name
         
 class Booking(models.Model):
-    user = models.CharField(max_length=200, default=1)
+    booking_member = models.ForeignKey(User, related_name='bookings', null=False, default=1, on_delete=models.SET_DEFAULT)
     date = models.DateField(auto_now_add=True)
     
     def __str__(self):
-        return self.user
+        return "{0}-{1}".format(self.id, self.booking_member)
 
 class Ticket(models.Model):
     first_name = models.CharField(max_length=200)

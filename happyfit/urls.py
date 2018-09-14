@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.views.static import serve
 from django.conf import settings
-from events.views import home, events_list, event_details, event_booking, event_booking_confirm
+from events.views import home, events_list, event_details, event_booking, event_booking_confirm, booking_details
 from django.urls import path, reverse_lazy
 from django.contrib.auth.views import login, logout, password_reset, password_reset_done, password_reset_confirm, password_reset_complete
 from accounts.views import register, add_profile, user_profile, edit_profile, subscriptions, subscribe, unsubscribe,view_subscription
@@ -30,6 +30,9 @@ urlpatterns = [
     path('<int:id>', event_details, name="event_details"),
     path('event/book', event_booking, name="event_booking"),
     path('event/confirmation', event_booking_confirm, name="booking_confirmation"),
+    
+    path('booking/<int:id>', booking_details, name="booking_details"),
+    
     
 
     

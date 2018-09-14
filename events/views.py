@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Event, Ticket
+from .models import Event, Ticket, Booking
 from .utils import create_ticket
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -36,7 +36,10 @@ def event_booking(request):
     grand_total = event.price * quantity
     return render(request, "events/event_booking.html", {"tickets": tickets, "event": event, "quantity": quantity, "grand_total": grand_total})
 
-def event_booking_confirm(request):
+# ------------create tickets and booking --------------
+
+
+def event_booking_confirm(request):#create booking#
     if request.method == "GET":
         return redirect('/')
     
@@ -56,20 +59,33 @@ def event_booking_confirm(request):
             )
         
         if charge.paid:
+            booking= Booking(booking_member_id=member)
+            booking.save()
+            print(booking)
             
-            create_ticket(member, event, member_first_name, member_last_name)
+            
+            
+            create_ticket(member, event, member_first_name, member_last_name, booking)
             for guest in guests:
                
                 first_name = request.POST['first_name_'+str(guest)]
                 last_name = request.POST['last_name_'+str(guest)]
               
-                create_ticket(member, event, first_name, last_name )
+                create_ticket(member, event, first_name, last_name, booking)
                 
                 
             return render(request, "events/booking_confirmation.html", {"member_first_name": first_name, "member_last_name": member_last_name, "quantity": quantity, "event":event})
         
         else:
             return HttpResponse("Charge Not Paid")
+
+def booking_details(request, id):
+    booking = get_object_or_404(Booking, pk=id)
+    tickets = Ticket.objects.filter(booking=booking)
+    
+    return render(request, "events/booking_details.html", {"booking": booking, "tickets": tickets})
+    
+    
     
 
 

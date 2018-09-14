@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<p>Booking details page</p>
+
+<h5>booking Ref{{booking.id}}</h5>
+<p>on: {{booking.date}}</p>
+
+{%for ticket in tickets%}
+<p>ticket no. {{ticket.id}}</p>
+<p>Member Name: {{ ticket.member}}</p> 
+<p>Participant: {{ticket.first_name}}{{ticket.last_name}}</p>
+<hr>
+{%endfor%}
+
+
+
+{% endblock %}
