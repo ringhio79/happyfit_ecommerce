@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
   
 <!-------------style & Layout ---------------->  
-  <link href="https://stackpath.bootstrapcdn.com/bootswatch/3.3.7/united/bootstrap.min.css" rel="stylesheet" integrity="sha384-pVJelSCJ58Og1XDc2E95RVYHZDPb9AVyXsI8NoVpB2xmtxoZKJePbMfE4mlXw7BJ" crossorigin="anonymous">
+  <link href="https://stackpath.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
 
 <!-------------scripts---------------->
@@ -28,7 +28,7 @@
 
 <body>
 
-  <nav class="navbar navbar-default navbar-fixed-top " role="navigation">
+  <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
@@ -37,13 +37,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <a class="navbar-brand" href="{% url 'home' %}"><i class="fas fa-dumbbell"></i>  Lay-Z-gym  <i class="fas fa-dumbbell"></i></a>
       </div>
 
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="nav navbar-nav">
+          <a class="navbar-brand" href="{% url 'home' %}"><i class="fas fa-dumbbell"></i>  Lay-Z-gym  <i class="fas fa-dumbbell"></i></a>
           <li><a href="{% url 'home' %}">HOME</a></li>
-          <li><a href="{% url 'subscriptions' %}">MEMBERSHIP</a></li>
+          <li><a href="{% url 'subscriptions' %}">SUBSCRIPTIONS</a></li>
           <li><a href="{% url 'events_list' %}">EVENTS</a></li>
           <li><a href="#">INSTRUCTORS</a></li>
           <li class="pull-right dropdown">
@@ -65,11 +65,11 @@
       </div>
     </div>
   </nav>
-  {% block home %} {% endblock %}
-  
-  <div class="container">
+
   {% block content %} {% endblock %}
-  </div>
+  
 </body>
+
+
 
 </html>

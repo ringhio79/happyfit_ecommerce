@@ -1,66 +1,67 @@
 {% extends 'base.html' %} {% load bootstrap_tags %} {% block content %}
 
-<div class="panel panel-warning">
-        <div class="panel-heading">
-                <h3 class="panel-title">Member Profile: {{ user.get_username }}</h3>
-        </div>
-        <div class="panel-body">
-                {% if request.user.profile %}
-                <div class="row">
-                        <div class="col-sm-12 col-md-6 profile-three">
-                                <img class="img-profile" src="{{MEDIA_URL}}{{request.user.profile.profile_image}}">
-                                <p>Membership no. {{ membership_no }}</p>
-                                {% if request.user.profile.subscription_id %}
-                                <p> you are subscribed to: {{subscription.plan.id}}</p>
-                                <p> subscription end date {{end_date}}</p>
-                                <a href="{% url 'unsubscribe' %}" class="btn btn-default">Cancel subscription</a>
-                                <a href="{% url 'view_subscription' %}" class="btn btn-default">Subscription Detail</a> {% else %}
-                                <p>No current active subscriptions. Click on the link below to see subscription options:</p>
-                                <a href="{% url 'subscriptions' %}" class="btn btn-default">Go to subscriptions</a> {% endif %}
-                        </div>
-                        <div class="col-sm-12 col-md-2 profile-one">
-                                <p>Full name:</p>
-                                <p>Gender:</p>
-                                <p>Address:</p>
-                        </div>
-                        <div class="col-sm-12 col-md-4 profile-two">
-                                <p>{{ request.user.profile.first_name }} {{ request.user.profile.last_name }}</p>
-                                <p>{{ request.user.profile.gender }}</p>
-                                <p>{{ request.user.profile.house_no }}<br>{{ request.user.profile.street_name }}<br>{{ request.user.profile.town_or_city }}<br>{{ request.user.profile.postcode }}<br>{{ request.user.profile.country }}</p>
-                                <a href="{% url 'edit_profile' user.profile.id %}" class="btn btn-default">Edit Profile</a>
-                        </div>
-
-
+<div class="container">
+        <div class="panel panel-success">
+                <div class="panel-heading">
+                        <h3 class="panel-title">Member Profile: {{ user.get_username }}</h3>
                 </div>
-                {% else %}
-                <p>You have not yet completed your profile, please click on the link below to complete your profile </p>
-                <a href="{% url 'add_profile' %}" class="btn btn-default">Add Profile</a> {% endif%}
+                <div class="panel-body">
+                        {% if request.user.profile %}
+                        <div class="row">
+                                <div class="col-sm-12 col-md-6 profile-three">
+                                        <img class="img-profile" src="{{MEDIA_URL}}{{request.user.profile.profile_image}}">
+                                        <p>Membership no. {{ membership_no }}</p>
+                                        {% if request.user.profile.subscription_id %}
+                                        <p> you are subscribed to: {{subscription.plan.id}}</p>
+                                        <p> subscription end date {{end_date}}</p>
+                                        <a href="{% url 'unsubscribe' %}" class="btn btn-default">Cancel subscription</a>
+                                        <a href="{% url 'view_subscription' %}" class="btn btn-default">Subscription Detail</a> {% else %}
+                                        <p>No current active subscriptions. Click on the link below to see subscription options:</p>
+                                        <a href="{% url 'subscriptions' %}" class="btn btn-default">Go to subscriptions</a> {% endif %}
+                                </div>
+                                <div class="col-sm-12 col-md-2 profile-one">
+                                        <p>Full name:</p>
+                                        <p>Gender:</p>
+                                        <p>Address:</p>
+                                </div>
+                                <div class="col-sm-12 col-md-4 profile-two">
+                                        <p>{{ request.user.profile.first_name }} {{ request.user.profile.last_name }}</p>
+                                        <p>{{ request.user.profile.gender }}</p>
+                                        <p>{{ request.user.profile.house_no }}<br>{{ request.user.profile.street_name }}<br>{{ request.user.profile.town_or_city }}<br>{{ request.user.profile.postcode }}<br>{{ request.user.profile.country }}</p>
+                                        <a href="{% url 'edit_profile' user.profile.id %}" class="btn btn-default">Edit Profile</a>
+                                </div>
+        
+        
+                        </div>
+                        {% else %}
+                        <p>You have not yet completed your profile, please click on the link below to complete your profile </p>
+                        <a href="{% url 'add_profile' %}" class="btn btn-default">Add Profile</a> {% endif%}
+                </div>
+                <hr class="hr-style">
+                <div class="container">
+        
+        
+                        <h4>testing code</h4>
+                        
+                        {% for booking in bookings %}
+                        <p>booking no.{{booking.id}} booked on {{booking.date}}</p>
+                          {{booking.booking_member}}
+                        {% endfor %}
+                        
+                        
+                        
+                        
+                        <h4>working code</h4>
+                        {% for ticket in tickets%}
+                        <p>booking no. {{ticket.booking.id}}</p>
+                        <p>Event: {{ticket.event.event_name}} Member: {{ticket.member}}</p>
+                        <p>Ticket No. {{ticket.id}} Participant: {{ticket.first_name}} {{ticket.last_name}}</p>
+                        <hr> {% endfor%}
+        
+        
+                </div>
         </div>
-        <hr class="hr-style">
-        <div class="container">
 
-
-                <h4>testing code</h4>
-                
-                {% for booking in bookings %}
-                <p>booking no.{{booking.id}} booked on {{booking.date}}</p>
-                  {{booking.booking_member}}
-                {% endfor %}
-                
-                
-                
-                
-                <h4>working code</h4>
-                {% for ticket in tickets%}
-                <p>booking no. {{ticket.booking.id}}</p>
-                <p>Event: {{ticket.event.event_name}} Member: {{ticket.member}}</p>
-                <p>Ticket No. {{ticket.id}} Participant: {{ticket.first_name}} {{ticket.last_name}}</p>
-                <hr> {% endfor%}
-
-
-        </div>
 </div>
-
-
 
 {% endblock %}

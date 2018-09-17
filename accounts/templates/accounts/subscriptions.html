@@ -3,23 +3,141 @@
 
 {% block content %}
 
-
-
-<h3>Pay a year in advance and get 2 months free!!</h3>
-<form method="POST" action='{% url 'subscribe' %}'>
-    {% csrf_token %}
-    <input type="hidden" value="MEMBERSHIP-YEARLY" name="plan"/>
-    <input type="submit" value="Annual €100.00"/>
-</form>
-
-<hr>
-
-<h3>Flexible monthly payment plan</h3>
-<form method="POST" action='{% url 'subscribe' %}'>
-    {% csrf_token %}
-    <input type="hidden" value="MEMBERSHIP_MONTHLY" name="plan"/>
-    <input type="submit" value="Montly €10.00"/>
-</form>
-
-
+<div class="container">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">Membership & Subscriptions</h3>
+      </div>
+      
+      <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8">
+                <h4>Lay-Z-Gym - Membership</h4>
+                <p>Our classes and events are exclusively available to Lay-Z-Gym Members.  There is no cost to the membership, all you need to do is complete your online membership form providing your personal details and payment details. Your card will not be charged at this point but only when making a booking for an event or class.  Once you are a member you will be able to book classes/events for yourself and your guests with ease.  Should you also wish to make use of our other gym facilities please read on below about our subscriptions.</p>
+                {% if user.is_authenticated%}
+                    {%if user.profile%}
+                    <a href="{% url 'user_profile' %}" class="btn btn-success btn-sm">My Account</a>
+                    {% else %}
+                    <a href="{% url 'user_profile' %}" class="btn btn-success btn-sm">Complete Account</a>
+                    {% endif %}
+                {% else %}
+                <p>Please <a href="{% url 'login' %}">log-in</a> if you wish to create a membership account.</p>
+                {% endif %}
+            </div>
+            <div class="col-xs-12 col-sm-4 membership">
+                <img src="../static/media/images/active-aerobics-beautiful-903171.jpg" alt="membership">
+            </div>
+        </div>
+        <hr class="hr-style">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 membership">
+                <img src="../static/media/images/machines-91849_1920.jpg" alt="membership">
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <h4>Lay-Z-Gym - Subscriptions</h4>
+                <p>If you would like to get more out of your gym membership then our subscriptions options give you a great flexible options and value for money.  With a Lay-Z-Gym - Subscription you will have full access to all facilities including Sauna, Pool and Gym equipment as well as discounted rates for events and classes.  <p><span style="color:#18bc9c">*</span> You must have a membership account in order to purchase a subscription. <a href="{% url 'user_profile' %}">Click here</a> to complete your membership account.<p>
+                </p>
+            </div>
+        </div>
+        
+        <br>
+        
+        <div class="row">
+            <div class="col-sm-12 col-md-6 subscriptions">
+                <h4>Lay-Z-Gym - Yearly</h4>
+                <ul style="list-style-type:none"> 
+                    <li>€5 Discount on all other classses and events</li>
+                    <li>2 months FREE!!</li>
+                    <li>Access to Pool, Sauna and Fitness Gym</li>
+                    <li>Free classes between 10am and 3pm (no booking required)</li>
+                </ul>
+                {% if user.is_authenticated %}
+                    {% if user.profile.subscription_id %}
+                    <button type="button" class="btn btn-success">
+                        view account details
+                    </button>
+                    {% elif user.profile%}
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#yearlyModal">
+                            click here to purchase</button>
+                    {%else%}
+                    <p><span style="color:#18bc9c">* Please complete your member account to continue further.</span></p>
+                    {%endif%}
+                {%else%}
+                <a href="{% url 'login' %}">log-in for further options</a>
+                {% endif %}
+                
+                <div class="modal fade" id="yearlyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title" id="myModalLabel">Lay-Z-Gym Yearly Subscription</h3>
+                      </div>
+                      <div class="modal-body">
+                        By clicking on the confirm button below you are purchasing a full year's subscription to Lay-Z-Gym.  Your account will be debited for the amount of €100.00 and your subscription will be active immediately.  Your subscription will automatically be renewed in a year's time unless you unsubscribe before the expiry date.  
+                      </div>
+                      <div class="modal-footer">
+                        <form method="POST" action='{% url 'subscribe' %}'>
+                          {% csrf_token %}
+                          <input type="hidden" value="MEMBERSHIP-YEARLY" name="plan"/>
+                          <input class="btn btn-default"type="submit" value="Purchase €100.00"/>
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </form>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div >
+            
+            <div class="col-sm-12 col-md-6 subscriptions">
+                <h4>Lay-Z-Gym - Monthly</h4>
+                <ul style="list-style-type:none"> 
+                    <li>€3 Discount on all other classses and events</li>
+                    <li>Cancel anytime online</li>
+                    <li>Access to Pool, Sauna and Fitness Gym</li>
+                    <li>Free classes between 10am and 3pm (no booking required)</li>
+                </ul>
+                {% if user.is_authenticated %}
+                    {% if user.profile.subscription_id %}
+                    <button type="button" class="btn btn-success">
+                        view account details
+                    </button>
+                    {% elif user.profile%}
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#yearlyModal">
+                            click here to purchase</button>
+                    {%else%}
+                    <p><span style="color:#18bc9c">* Please complete your member account to continue further.</span></p>
+                    {%endif%}
+                {%else%}
+                <a href="{% url 'login' %}">log-in for further options</a>
+                {% endif %}
+                
+                <div class="modal fade" id="monthlyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title" id="myModalLabel">Lay-Z-Gym Monthly Subscription</h3>
+                      </div>
+                      <div class="modal-body">
+                        By clicking on the confirm button below you are purchasing a monthly subscription to Lay-Z-Gym.  Your account will be debited for the amount of €10.00 and your subscription will be active immediately.  Your subscription will automatically be renewed on a monthly basis unless you unsubscribe before the expiry date.  
+                      </div>
+                      <div class="modal-footer">
+                        <form method="POST" action='{% url 'subscribe' %}'>
+                          {% csrf_token %}
+                          <input type="hidden" value="MEMBERSHIP_MONTHLY" name="plan"/>
+                          <input class="btn btn-default"type="submit" value="Purchase €10.00"/>
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </form>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div >
+            </div>
+        </div>
+    
+      </div>
+    </div>
+</div>
 {% endblock %}
