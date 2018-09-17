@@ -1,11 +1,17 @@
 body {
     padding-top: 60px;
-    background-color: #f5f5f5;
+    background-image: url("../media/images/adult-arm-art-326559.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+    z-index: -1;
+    /*background-color: #f5f5f5;*/
 }
 
 /*---------navbar------------*/
 .navbar {
-    background-color: #149c82
+    margin-top: 20px;
 }
 
 .navbar-nav {
@@ -13,26 +19,29 @@ body {
     text-align: center;
   }
 .navbar-nav li {
-      float: none;
-      display: inline-block;
-    }
+    float: none;
+    display: inline-block;
+}
+
 
 /*---------home page------------*/
 
-.home-image {
-    position: relative;
-    text-align: center;
-    color: #fff;
-}
 .motiviation {
-    position: absolute;
-    top: 80px;
-    left: 80px;
+    color: #ffffff;
+    height:150px; 
+    width: 100%;
+    margin: 100px;
+    /*padding-left: px;*/
+    text-align: left;
 }
 
 H1 {
     font-family: 'Permanent Marker', cursive;
-    font-size: 4em;
+    font-size: 3.5em;
+}
+
+.home-bottom {
+    background-color: #f5f5f5;
 }
 
 .home-parent {
@@ -55,10 +64,10 @@ H1 {
 }
 
 /*---------sbuscriptions page------------*/
-.topline {
-    background-color: #18bc9c;
-    height: 30px;
-    color: #ffffff;
+.subs-image {
+    width: 100%;
+    position: fixed;
+    z-index: -1;
 }
 .membership img {
     border-radius: 5px;
@@ -88,10 +97,12 @@ H1 {
 .panel {
     width: 90%;
     margin-left: 5%;
-    margin-top: 20px;
+    margin-top: 60px;
+    opacity: 0.92;
 }
 
 .panel-body {
+    background-color: #fff;
     padding: 30px 50px;
 }
 
