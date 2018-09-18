@@ -3,12 +3,60 @@
 {% block content %}
 
 
-<h4><a href="{% url 'subscriptions' %}">choose a subscription</a></h4>
-
-
-
-{% for event in events %}
-<h4><a href="{% url 'event_details' event.id %}">{{event.event_name}}</a>
-{% endfor %}
+<div class="container events">
+    
+    <div class="row">
+        <div class="events-intro">
+            <h4>Class Packages and Special Events</h4>
+            <p>Lay-Z-Gym offers a number classes which are open to all members.  Group classes are included in the subscription fee for subscribed members or can be purchased as a 8-lesson value pack online.  We also have a number of special events which are open to members and guests and may also be booked online.  Please see below a list of classes and events that may be booked/purchased online.</p>
+            
+            Jump to Class Category: {% for theme in themes %} <a href="#{{theme}}"> {{theme}}</a>  | {% endfor%}
+        </div>
+    </div>
+    <hr class="hr-style">
+    
+    <div class="event-cat" id="Body & Mind">
+        <h4>Body & Mind</h4>
+        {% for event in events %}
+        {% if event.theme == "Body & Mind" %}
+        <div class="row events-body" id="Body & Mind">
+            <div class="col-xs-12 col-sm-4 events-image">
+                <img width="150" height="75" src="{{MEDIA_URL}}{{event.image}}" alt="event-image">
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <h4>{{event.event_name}}</h4>
+                {{event.theme}}
+                <p> {{event.description | linebreaks}}</p>
+                <p> Starting on: {{event.date}} </p>
+                <a href="{% url 'event_details' event.id %}" class="btn btn-default btn-sm">More info/Book</a>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    
+    <div class="event-cat" id="Athletic">
+        <a class="anchor"></a>
+        <h4>Athletic</h4>
+    
+        {% for event in events %}
+        {% if event.theme == "Athletic" %}
+        <div class="row events-body">
+            <div class="col-xs-12 col-sm-4 events-image">
+                <img width="150" height="75" src="{{MEDIA_URL}}{{event.image}}" alt="event-image">
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <h4>{{event.event_name}}</h4>
+                {{event.theme}}
+                <p> {{event.description | linebreaks}}</p>
+                <p> Starting on: {{event.date}} </p>
+                <a href="{% url 'event_details' event.id %}" class="btn btn-default btn-sm">More info/Book</a>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    
+</div>
 
 {% endblock %}

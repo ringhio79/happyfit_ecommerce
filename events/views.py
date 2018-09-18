@@ -16,7 +16,25 @@ def home(request):
 
 def events_list(request):
     events = Event.objects.all()
-    return render(request, "events/events_list.html", {'events': events})
+    themes = []
+    for event in events:
+        value= event.theme
+        if value not in themes:
+            themes.append(value)
+    return render(request, "events/events_list.html", {'events': events, 'themes': themes})
+
+# def events_filter(request):
+#     events = Event.objects.all()
+#     themes = []
+#     for event in events:
+#         value= event.theme
+#         if value not in themes:
+#             themes.append(value)
+#     if method == 'POST':
+#         print(request.POST)
+#         events_filtered = Event.objects.filter(theme__icontains=request.GET['option'])
+#     return render(request, "events/events_list.html", {'events': events_filtered, 'themes': themes})
+
 
 def event_details(request, id):
     event = get_object_or_404(Event, pk=id)

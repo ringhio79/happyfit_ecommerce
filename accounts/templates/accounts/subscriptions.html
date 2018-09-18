@@ -54,9 +54,7 @@
                 </ul>
                 {% if user.is_authenticated %}
                     {% if user.profile.subscription_id %}
-                    <button type="button" class="btn btn-success">
-                        view account details
-                    </button>
+                    <a href="{% url 'user_profile' %}" class="btn btn-success">view account details</a>
                     {% elif user.profile%}
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#yearlyModal">
                             click here to purchase</button>
@@ -100,9 +98,8 @@
                 </ul>
                 {% if user.is_authenticated %}
                     {% if user.profile.subscription_id %}
-                    <button type="button" class="btn btn-success">
-                        view account details
-                    </button>
+                    
+                    <a href="{% url 'user_profile' %}" class="btn btn-success">view account details</a>
                     {% elif user.profile%}
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#yearlyModal">
                             click here to purchase</button>
