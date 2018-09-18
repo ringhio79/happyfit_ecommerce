@@ -128,10 +128,13 @@ H1 {
     margin-bottom: 30px;
     opacity: 0.92;
     background-color: #ffffff;
-    
 }
 
-.events-body, .events-intro {
+#id_theme {
+    width: 150px;
+}
+
+.events-list, .events-intro {
     padding: 30px 50px;
 }
 
@@ -145,14 +148,8 @@ H1 {
     margin-right: auto;
 }
 
-.anchor {
-    margin-top: 90px;
-    padding-top: 90px;
-    
-}
-.event-cat h4{
-    color: #18bc9c;
-}
+
+
 
 /*---------profile page------------*/
 

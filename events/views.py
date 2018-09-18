@@ -3,6 +3,7 @@ from .models import Event, Ticket, Booking
 from .utils import create_ticket
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from .filters import ThemeFilter
 import stripe
 
 
@@ -14,26 +15,19 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 def home(request):
     return render(request, "events/home.html")
 
-def events_list(request):
-    events = Event.objects.all()
-    themes = []
-    for event in events:
-        value= event.theme
-        if value not in themes:
-            themes.append(value)
-    return render(request, "events/events_list.html", {'events': events, 'themes': themes})
-
-# def events_filter(request):
+# def events_list(request):
 #     events = Event.objects.all()
 #     themes = []
 #     for event in events:
 #         value= event.theme
 #         if value not in themes:
 #             themes.append(value)
-#     if method == 'POST':
-#         print(request.POST)
-#         events_filtered = Event.objects.filter(theme__icontains=request.GET['option'])
-#     return render(request, "events/events_list.html", {'events': events_filtered, 'themes': themes})
+#     return render(request, "events/events_list.html", {'events': events, 'themes': themes})
+
+def events_list(request):
+    events_list = Event.objects.all()
+    theme_filter = ThemeFilter(request.GET, queryset=events_list)
+    return render(request, "events/events_list.html", {'filter': theme_filter})
 
 
 def event_details(request, id):
