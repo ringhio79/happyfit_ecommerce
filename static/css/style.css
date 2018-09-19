@@ -10,15 +10,16 @@ body {
 }
 
 .hr-style {
+    margin: 50px;
     border: 0;
     height: 1px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(20, 156, 130, 1), rgba(0, 0, 0, 0));
 }
 
 /*---------navbar------------*/
-.navbar {
-    margin-top: 30px;
-}
+/*.navbar {*/
+/*    margin-top: 15px;*/
+/*}*/
 
 .navbar-nav {
     width: 100%;
@@ -34,9 +35,9 @@ body {
 .panel {
     width: 90%;
     margin-left: 5%;
-    margin-top: 60px;
+    margin-top: 45px;
     margin-bottom: 30px;
-    opacity: 0.92;
+    /*opacity: 0.93;*/
 }
 
 .panel-body {
@@ -85,7 +86,7 @@ H1 {
     border-width: thin;
 }
 
-/*---------sbuscriptions page------------*/
+/*---------subscriptions page------------*/
 .subs-image {
     width: 100%;
     position: fixed;
@@ -118,37 +119,46 @@ H1 {
 }
 
 /*---------events------------*/
-.events{
-    border-radius: 5px;
-    border-color: #18bc9c;
-    border-style: solid;
-    width: 90%;
-    margin-left: 5%;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    opacity: 0.92;
-    background-color: #ffffff;
+
+.events-intro {
+    text-align: Justify;
+    margin-top: 20px;
+    padding: 5px;
+}
+.well {
+    width: 100%;
+    margin: 10px;
+    background-color: #D3D3D3;
+    padding: 5px;
+    text-align: center;
 }
 
-#id_theme {
+#id_category {
     width: 150px;
 }
-
-.events-list, .events-intro {
-    padding: 30px 50px;
+.carousel-inner .item img {
+    border-radius: 5px;
 }
 
-.events-image img {
+.event-card {
+    border-radius: 5px;
+    background-color: #645a9a;
+    color: #ffffff;
+    margin: 15px 10px;
+    padding: 15px;
+}
+
+.event-card:hover {
+    transform: scale(1.1);
+}
+/*---------event details page------------*/
+.event-image img {
     border-radius: 5px;
     box-shadow: -5px 5px 8px -1px rgba(184,182,184,1);
-    display: block;
     height: auto;
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    object-fit: cover;
 }
-
-
 
 
 /*---------profile page------------*/

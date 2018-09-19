@@ -3,7 +3,7 @@ from .models import Event, Ticket, Booking
 from .utils import create_ticket
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from .filters import ThemeFilter
+from .filters import CategoryFilter
 import stripe
 
 
@@ -17,17 +17,17 @@ def home(request):
 
 # def events_list(request):
 #     events = Event.objects.all()
-#     themes = []
+#     categories = []
 #     for event in events:
-#         value= event.theme
-#         if value not in themes:
-#             themes.append(value)
-#     return render(request, "events/events_list.html", {'events': events, 'themes': themes})
+#         value= event.category
+#         if value not in categories:
+#             categories.append(value)
+#     return render(request, "events/events_list.html", {'events': events, 'categories': categories})
 
 def events_list(request):
     events_list = Event.objects.all()
-    theme_filter = ThemeFilter(request.GET, queryset=events_list)
-    return render(request, "events/events_list.html", {'filter': theme_filter})
+    category_filter = CategoryFilter(request.GET, queryset=events_list)
+    return render(request, "events/events_list.html", {'filter': category_filter, 'events': events_list})
 
 
 def event_details(request, id):
