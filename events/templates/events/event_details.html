@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+ {% load crispy_forms_tags %}
 {% block content %}
 
 <div class="container">
@@ -16,56 +16,98 @@
         </div>
         <div class="col-md-6">
           <h3>{{event.event_name}}</h3>
-              
-              <p class="card-text">{{event.description}}</p>
-              <p> On: {{event.date}}</p>
-              <p> Capacity: {{event.capacity}}</p>
-              <p> Available: {{available}}</p>
+          <p class="card-text">{{event.description | linebreaks}}</p>
         </div>
-        
       </div>
+      <hr class="hr-style">
       
-<!----------------- variable details  ------------->
-
-
-        
-              <h4>€{{event.price}}</h4>
-              
+<!-------- Special event conditional content -------->
+    {% if event.category == "Special Event"%}
+      <div class="row">
+        <div class="col-md-12 event-details-bottom">
+          
           {% if user.is_authenticated %}
+          
             {% if user.profile %}
-            <p> user authenticated and profile</p>
-
+            <!-------- logged in & stripe user -------->
+            <h4>Class Pack Price: €{{event.price}}</h4>
+            <p> Class Capacity: {{event.capacity}}</p>
+            <p> Places Available: {{available}}</p> 
             <form action="{% url 'event_booking' %}">
-              
-              <input type="hidden" name="id" value="{{event.id}}"/>
-              
+              <input type="hidden" name="id" value="{{event.id}}">
               {% if can_book %}
-              <p>Quantity: <input type="number" name="quantity" min="1" max="{{available}}"></p>
-              <input class="btn btn-success" type="submit" value="Add to booking"/>
+              <p>Members of Lay-Z-Gym are able to purchase tickets/courses for themselves and their guests. If you would like to attend this event kindly fill in the details below and click next.</p>
+              <p>Please enter no. of Tickets to purhcase:</p>
+              <p><input class="custom-input" type="number" name="quantity" min="1" max="{{available}}">&nbsp
+              <input class="btn btn-success btn-sm" type="submit" value="Next"></p>
+              
+              <a href="{%  url 'events_list' %}">Go Back to Events</a>
               {% else %}
-              <a href="{%  url 'events_list' %}" class="btn btn-success" role="button">Fully Booked Back</a>
+              <p> This class is now fully booked, please return to the <a href="{%  url 'events_list' %}">main events page</a> for more class options. </p>
               {% endif %}
             </form>
-          </div>
-            {% else %}
-            <p> user authenticated no profile</p>
-            <div>
-            <form action="{% url 'event_booking' %}">
-              
-              <a href="{% url 'add_profile' %}?next={{request.path}}" class="btn btn-success" role="button">please complete your profile</a>
-              
-            </form>
-          </div>
+            {%else%}
+            <!-------- logged in but no profile/not member -------->
+            <p>The Lay-Z-Gym fitness classes are exclusively available to gym members.  Membership is free of charge for registered users.  If you would like to complete the registration please <a href="{% url 'add_profile' %}">click here</a>.</p>
             {% endif %}
-          {% else %}
-          <p>user not authenticated</p>
-          <a href="{% url 'login' %}?next={% url 'event_details' event.id %}" class="btn btn-success" role="button">please log in for further options</a>
+          {%else%}
+          <!-------- Not logged in -------->
+          <h4>Class Pack Price: €{{event.price}}</h4>
+            <p> Class Capacity: {{event.capacity}}</p>
+            <p>Kindly log in for further details and booking options.</p>
           {% endif %}
-
-<!----------------- content ------------->
+        </div>
+      </div>
       
+    {% else %}
+    
+<!----------------- Classes conditional content  ------------->
+      <div class="row">
+        <div class="col-md-12 event-details-bottom">
+          
+<!-------- User type conditional content -------->
+          {% if user.is_authenticated %}
+              {% if user.profile.subscription_id %}
+              <!-------- logged in subscribed user -------->
+              <h4>Class Pack Price: €{{event.price}}</h4>
+              <p> Class Capacity: {{event.capacity}}</p>
+              <p> You currently have an active subscription at Lay-Z-Gym.  As a subscribed member you are entitled to attend any of our package classes Free of Charge and there is no booking required.  For details of your subscription please go to your <a href="{% url 'user_profile' %}">account details page.</a></p>
+              <a href="{%  url 'events_list' %}">Go Back to Events</a>
+              
+              {% elif user.profile%}
+              <!-------- logged in has stripe (no subscription) -------->
+              <h4>Class Pack Price: €{{event.price}}</h4>
+              <p> Class Capacity: {{event.capacity}}</p>
+              <p> Places Available: {{available}}</p> 
+              <form action="{% url 'event_booking' %}">
+                <input type="hidden" name="id" value="{{event.id}}"/>
+                {% if can_book %}
+                <p>Members of Lay-Z-Gym are able to purchase tickets/courses for themselves and their guests. If you would like to attend this course kindly fill in the details below and click next.</p>
+                <p>Please enter no. of Tickets to purhcase:</p>
+                <p><input class="custom-input" type="number" name="quantity" min="1" max="{{available}}">&nbsp
+                <input class="btn btn-success btn-sm" type="submit" value="Next"></p>
+                
+                <a href="{%  url 'events_list' %}">Go Back to Events</a>
+                {% else %}
+                <p> This class is now fully booked, please return to the <a href="{%  url 'events_list' %}">main events page</a> for more class options. </p>
+                {% endif %}
+              </form>
+              {%else%}
+              <!-------- logged in but no profile/not member -------->
+              <p>The Lay-Z-Gym fitness classes are exclusively available to gym members.  Membership is free of charge for registered users.  If you would like to complete the registration please <a href="{% url 'add_profile' %}">click here</a>.</p>
+              {%endif%}
+          {%else%}
+          <!-------- Not logged in -------->
+          <h4>Class Pack Price: €{{event.price}}</h4>
+          <p> Class Capacity: {{event.capacity}}</p>
+          <p>Kindly log in for further details and booking options.</p>
+          {% endif %}
+<!----------------- content ------------->
+    
     </div>
   </div>
+    {% endif %} 
+  <hr class="hr-style">
 </div>
 
 {% endblock %}

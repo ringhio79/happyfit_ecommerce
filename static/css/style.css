@@ -16,11 +16,25 @@ body {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(20, 156, 130, 1), rgba(0, 0, 0, 0));
 }
 
-/*---------navbar------------*/
-/*.navbar {*/
-/*    margin-top: 15px;*/
-/*}*/
+.custom-input {
+    display: inline;
+    width: 150px;
+    height: 45px;
+    padding: 10px 15px;
+    font-size: 15px;
+    line-height: 1.42857143;
+    color: #2c3e50;
+    background-color: #ffffff;
+    border: 1px solid #dce4ec;
+    border-radius: 4px;
+    
+}
 
+/*---------navbar------------*/
+.navbar {
+    border-bottom: ridge;
+    border-bottom-color: #149c82;
+}
 .navbar-nav {
     width: 100%;
     text-align: center;
@@ -33,9 +47,10 @@ body {
 /*---------navbar------------*/
 
 .panel {
+    /*border-color: #149c82;*/
     width: 90%;
     margin-left: 5%;
-    margin-top: 45px;
+    margin-top: 10px;
     margin-bottom: 30px;
     /*opacity: 0.93;*/
 }
@@ -158,6 +173,10 @@ H1 {
     height: auto;
     width: 100%;
     object-fit: cover;
+}
+
+.event-details-bottom {
+    margin: 0px 10px;
 }
 
 

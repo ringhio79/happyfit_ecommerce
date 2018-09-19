@@ -41,17 +41,19 @@
             </div>
         </div>
         
-        <br>
         
+        <br>
         <div class="row">
             <div class="col-sm-12 col-md-6 subscriptions">
                 <h4>Lay-Z-Gym - Yearly</h4>
                 <ul style="list-style-type:none"> 
-                    <li>€5 Discount on all other classses and events</li>
+                    <li>€5 Discount on all our special events</li>
                     <li>2 months FREE!!</li>
                     <li>Access to Pool, Sauna and Fitness Gym</li>
-                    <li>Free classes between 10am and 3pm (no booking required)</li>
+                    <li>Free classes (no booking required)</li>
                 </ul>
+                
+<!-------- conditional content -------->
                 {% if user.is_authenticated %}
                     {% if user.profile.subscription_id %}
                     <a href="{% url 'user_profile' %}" class="btn btn-success">view account details</a>
@@ -86,16 +88,18 @@
                     </div>
                   </div>
                 </div>
-            </div >
+            </div>
             
             <div class="col-sm-12 col-md-6 subscriptions">
                 <h4>Lay-Z-Gym - Monthly</h4>
                 <ul style="list-style-type:none"> 
-                    <li>€3 Discount on all other classses and events</li>
+                    <li>€3 Discount on all our special events</li>
                     <li>Cancel anytime online</li>
                     <li>Access to Pool, Sauna and Fitness Gym</li>
-                    <li>Free classes between 10am and 3pm (no booking required)</li>
+                    <li>Free classes (no booking required)</li>
                 </ul>
+
+<!-------- conditional content -------->
                 {% if user.is_authenticated %}
                     {% if user.profile.subscription_id %}
                     
@@ -131,7 +135,7 @@
                     </div>
                   </div>
                 </div>
-            </div >
+            </div>
             </div>
         </div>
     

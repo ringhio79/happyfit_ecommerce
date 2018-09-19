@@ -43,16 +43,14 @@
                         </div>
                 </div>
             </div>
-            
-<hr class="hr-style">
-    
+            <hr class="hr-style">
             <div class="row">
                 {% for event in filter.qs %}
                 <div class="col-md-4">
                     <div class=" event-card">
                         <p><b>{{event.event_name}}</b></p>
                         {{event.category}}
-                        <p> Starting on: {{event.date}} </p>
+                        <p> Starting on: {{event.date}}</p>
                         <a href="{% url 'event_details' event.id %}">Click here for More info</a>
                     </div>
                 </div>
