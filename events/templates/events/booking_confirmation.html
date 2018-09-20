@@ -1,17 +1,24 @@
 {% extends 'base.html' %}
-
-
 {% block content %}
 
-<p>Booking confirmation page</p>
+<div class="container">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Reservation Confirmation</h3>
+        </div>
+        <div class="panel-body">
+            
+            <h4>Reservation no. {{booking_no}}</h4>
 
-<h5>{{ticket.event_name}}</h5>
-<p>on: {{event_date}}</p>
-
-<p>Member Name: {{ member_first_name }} {{member_last_name}}</p> 
-<p>Number of tickets purchased: {{quantity}}</p>
-
-
+            <br><p><span style="font-weight: bold">Member name: </span>{{ member_first_name }} {{member_last_name}}</p>
+            <p><span style="font-weight: bold">Number of tickets purchased:</span> {{quantity}}</p>
+            
+            <p>For full details of your bookings and tickets please refer to your account page <a href="{% url 'user_profile' %}">click here</a>.</p>
+            
+            <a href="{% url 'home' %}">go back home</a>.
+        </div>
+    </div>
+</div>
 
 
 

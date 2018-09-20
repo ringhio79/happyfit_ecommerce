@@ -5,34 +5,51 @@
 <div class="container">
     <div class="panel panel-success">
         <div class="panel-heading">
-            <h3 class="panel-title">Panel success</h3>
+            <h3 class="panel-title">Booking: {{event.event_name}}</h3>
         </div>
         <div class="panel-body">
-            <h3>event booking page</h3>
-            <form method="POST" action="{% url 'booking_confirmation' %} ">
-                {% csrf_token %}
-
-                <input type="hidden" name="id" value="{{event.id}}" />
-                <input type="hidden" name="user_id" value="{{user.id }}" />
-                <input type="hidden" name="ticket_quantity" value="{{quantity }}">
-                <input type="hidden" name="grand_total" value="{{grand_total }}">
-
-                <h4>{{event.event_name}} </h4>
-                <p> Quantity: {{quantity}}</p>
-                <p> Unit Price: {{event.price}}</p>
-                <p> Grand Total: {{grand_total}}</p>
-
-                <h5>Member name {{user.get_username}}</h5>
-                <p>Please enter the Guest name</p>
-                {% for ticket in tickets %}
-                <p>Guest {{ticket}}:</p>
-                <p>First name: <input type="text" name="first_name_{{ticket}}"></p>
-                <p>Last name: <input type="text" name="last_name_{{ticket}}"></p>
-                {% endfor %}
-
-                <input class="btn btn-success" type="submit" value="Confirm/Purchase" />
-            </form>
-            <a href="{%url 'home'%}" class="btn btn-success">cancel/home</a>
+            <div class="row">
+                <h4>{{event.event_name}}</h4>
+            </div>
+            <div class="row ticket-info">
+                <form method="POST" action="{% url 'booking_confirmation' %} ">
+                    {% csrf_token %}
+    
+                    <input type="hidden" name="id" value="{{event.id}}" />
+                    <input type="hidden" name="user_id" value="{{user.id }}" />
+                    <input type="hidden" name="ticket_quantity" value="{{quantity }}">
+                    <input type="hidden" name="grand_total" value="{{grand_total }}">
+                
+                <div class="col-md-4">
+                    <br><p> <span style="font-weight: bold">Unit Price: </span> € {{event.price}}</p>
+                    <p> <span style="font-weight: bold">Grand Total: </span> € {{grand_total}}</p>
+                </div>
+                <div class="col-md-8">
+                    <br><p><span style="font-weight: bold">Member name: </span> {{user.profile.first_name}} {{user.profile.last_name}}</p>
+                    <p> <span style="font-weight: bold">Number of Participants: </span> {{quantity}}</p>
+                    
+                </div>
+                <div class="col-md-12">
+                    {% if quantity > 1 %}
+                        <br><p><span style="font-weight: bold">Please enter the Guest name/s:</span></p>
+                        {% for ticket in tickets %}
+                        <div class="col-md-12">
+                            <br><p><span style="font-weight: bold">Guest:</span> {{ticket}}:</p>
+                            <p><span style="font-weight: bold">First name:</span> <input class="custom-input" type="text" name="first_name_{{ticket}}">
+                            <span style="font-weight: bold">Last name:</span> <input class="custom-input" type="text" name="last_name_{{ticket}}"></p>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="col-md-12" align="right">
+                    <input class="btn btn-success " type="submit" value="Confirm" />
+                    <a href="{%url 'events_list'%}" class="btn btn-success">Cancel</a>
+                </div>
+    
+                    
+                </form>
+            </div>
+            
         </div>
     </div>
 </div>

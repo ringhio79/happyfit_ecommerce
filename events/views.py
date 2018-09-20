@@ -73,10 +73,8 @@ def event_booking_confirm(request):#create booking#
         if charge.paid:
             booking= Booking(booking_member_id=member)
             booking.save()
-            print(booking)
-            
-            
-            
+            booking_no = "%05d" % booking.id
+
             create_ticket(member, event, member_first_name, member_last_name, booking)
             for guest in guests:
                
@@ -84,9 +82,9 @@ def event_booking_confirm(request):#create booking#
                 last_name = request.POST['last_name_'+str(guest)]
               
                 create_ticket(member, event, first_name, last_name, booking)
+            print(event)
                 
-                
-            return render(request, "events/booking_confirmation.html", {"member_first_name": first_name, "member_last_name": member_last_name, "quantity": quantity, "event":event})
+            return render(request, "events/booking_confirmation.html", {"member_first_name": member_first_name, "member_last_name": member_last_name, "quantity": quantity, "event":event, "booking_no": booking_no})
         
         else:
             return HttpResponse("Charge Not Paid")

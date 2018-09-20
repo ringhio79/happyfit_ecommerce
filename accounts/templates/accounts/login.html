@@ -1,14 +1,29 @@
-{% extends 'base.html' %}
-{% load bootstrap_tags %}
-{% block title %}Login{% endblock %} {% block content %}
+{% extends 'base.html' %} {% load bootstrap_tags %} {% block title %}Login{% endblock %} {% block content %}
 
-<h2>Login</h2>
-<form method="post">
-  {% csrf_token %} {{ form | as_bootstrap }}
-  <p><a href="{% url 'password_reset' %}">Forgot my password</a></p>
-  <button type="submit">Login</button>
-  
-</form>
+
+<div class="container">
+  <div class="row">
+    <div class="motiviation-logins">
+      <h1>It hurts now but one day<br> it will be <span style="color:#149c82">your warmup!!</span></h1>
+    </div>
+  </div>
+
+  <div class="well" id="custom-well">
+    <h2>Login</h2>
+    <form method="post">
+      {% csrf_token %} {{ form | as_bootstrap }}
+      <p><a href="{% url 'password_reset' %}">Forgot my password</a></p>
+      <button type="submit">Login</button>
+
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
 
 
 {% endblock %}
