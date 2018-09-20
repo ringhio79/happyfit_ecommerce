@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container">
+	<div class="panel panel-info">
+	  <div class="panel-heading">
+		<h3 class="panel-title">Error</h3>
+	  </div>
+	  <div class="panel-body">
+		{{message}}
+		<p>Please <a href="{% url 'home' %}"> click here </a>to go back to the home page.</p>
+	  </div>
+	</div>
+</div>
+
+{% endblock %}

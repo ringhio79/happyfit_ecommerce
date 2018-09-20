@@ -14,16 +14,10 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 # Create your views here.
 def home(request):
     return render(request, "events/home.html")
-
-# def events_list(request):
-#     events = Event.objects.all()
-#     categories = []
-#     for event in events:
-#         value= event.category
-#         if value not in categories:
-#             categories.append(value)
-#     return render(request, "events/events_list.html", {'events': events, 'categories': categories})
-
+    
+def class_schedule(request):
+    return render(request, "events/class_schedule.html")
+    
 def events_list(request):
     events_list = Event.objects.all()
     category_filter = CategoryFilter(request.GET, queryset=events_list)

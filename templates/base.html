@@ -44,7 +44,13 @@
           <a class="navbar-brand" href="{% url 'home' %}"><i class="fas fa-dumbbell"></i>  Lay-Z-gym  <i class="fas fa-dumbbell"></i></a>
           <li><a href="{% url 'home' %}">HOME</a></li>
           <li><a href="{% url 'subscriptions' %}">SUBSCRIPTIONS</a></li>
-          <li><a href="{% url 'events_list' %}">EVENTS</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">GROUPCLASSES <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+               <li><a href="{% url 'events_list' %}">Events & Classes</a></li>
+			         <li><a href="{% url 'class_schedule' %}">Class Schedule</a></li>
+            </ul>
+          </li>
           <li><a href="#">INSTRUCTORS</a></li>
           <li class="pull-right dropdown">
             {% if user.is_authenticated %}

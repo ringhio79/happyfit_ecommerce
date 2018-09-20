@@ -75,7 +75,9 @@ def edit_profile(request, id):
     profile = get_object_or_404(Profile, pk=id)
     
     if request.user.profile.id != profile.id:
-        return HttpResponse("You are not authorised to view this page")
+        message="You are not authorised to view this page."
+        return render(request, "accounts/custom_error.html", {"message":message})
+
     else:
         if request.method == "POST":
             
