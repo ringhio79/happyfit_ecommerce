@@ -31,18 +31,19 @@
   <nav class="navbar navbar-inverse navbar-fixed-top " role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="True">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{% url 'home' %}">Lay-Z-Gym</a>
       </div>
-
-      <div class="collapse navbar-collapse" id="navbar">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        
         <ul class="nav navbar-nav">
-          <a class="navbar-brand" href="{% url 'home' %}"><i class="fas fa-dumbbell"></i>  Lay-Z-gym  <i class="fas fa-dumbbell"></i></a>
-          <li><a href="{% url 'home' %}">HOME</a></li>
+          
+          <li><a href="{% url 'home' %}"><i class="fas fa-home"></i></a></li>
           <li><a href="{% url 'subscriptions' %}">SUBSCRIPTIONS</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">GROUPCLASSES <span class="caret"></span></a>
@@ -52,22 +53,23 @@
             </ul>
           </li>
           <li><a href="#">INSTRUCTORS</a></li>
-          <li class="pull-right dropdown">
+          <li class="dropdown">
             {% if user.is_authenticated %}
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Hi {{ user.get_username }} <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-             
-              <li><a href="{% url 'user_profile' %}"><i class="far fa-user"></i> Account</a></li>
-              <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
-              {% else %}
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Hello, Sign-in <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Register</a></li>
-              <li><a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
-              {% endif %}
-            </ul>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Hi {{ user.get_username }} <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{% url 'user_profile' %}"><i class="far fa-user"></i> Account</a></li>
+                <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Log Out</a></li>
+              </ul>
+            {% else %}
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Members <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Register</a></li>
+                <li><a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
+              </ul>
+            {% endif %}
           </li>
         </ul>
+        
       </div>
     </div>
   </nav>

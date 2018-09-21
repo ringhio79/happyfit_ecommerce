@@ -17,14 +17,11 @@
 }
 
 body {
-    padding-top: 60px;
+    /*margin-top: 30px;*/
     background-image: url("../media/images/adult-arm-art-326559.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: center; 
-    z-index: -1;
-    /*background-color: #f5f5f5;*/
 }
 
 .panel {
@@ -93,13 +90,16 @@ body {
     border-bottom: ridge;
     border-bottom-color: #149c82;
 }
-.navbar-nav {
-    width: 100%;
-    text-align: center;
-  }
-.navbar-nav li {
-    float: none;
-    display: inline-block;
+
+
+.navbar .navbar-nav {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
+
+.navbar .navbar-collapse {
+  text-align: center;
 }
 
 /*---------home page------------*/
@@ -115,7 +115,7 @@ body {
 
 H1 {
     font-family: 'Permanent Marker', cursive;
-    font-size: 3.5em;
+    font-size: 3.5rem;
 }
 
 .home-bottom {
