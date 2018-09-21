@@ -44,7 +44,8 @@
         
         <br>
         <div class="row">
-            <div class="col-sm-12 col-md-6 subscriptions">
+            <div class="col-sm-12 col-md-6">
+              <div class="subscriptions">
                 <h4>Lay-Z-Gym - Yearly</h4>
                 <ul style="list-style-type:none"> 
                     <li>€5 Discount on all our special events</li>
@@ -52,6 +53,7 @@
                     <li>Access to Pool, Sauna and Fitness Gym</li>
                     <li>Free classes (no booking required)</li>
                 </ul>
+              
                 
 <!-------- conditional content -------->
                 {% if user.is_authenticated %}
@@ -66,7 +68,7 @@
                 {%else%}
                 <a href="{% url 'login' %}">log-in for further options</a>
                 {% endif %}
-                
+              </div>  
                 <div class="modal fade" id="yearlyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -90,7 +92,8 @@
                 </div>
             </div>
             
-            <div class="col-sm-12 col-md-6 subscriptions">
+            <div class="col-sm-12 col-md-6">
+              <div class="subscriptions">
                 <h4>Lay-Z-Gym - Monthly</h4>
                 <ul style="list-style-type:none"> 
                     <li>€3 Discount on all our special events</li>
@@ -98,6 +101,7 @@
                     <li>Access to Pool, Sauna and Fitness Gym</li>
                     <li>Free classes (no booking required)</li>
                 </ul>
+              
 
 <!-------- conditional content -------->
                 {% if user.is_authenticated %}
@@ -113,7 +117,7 @@
                 {%else%}
                 <a href="{% url 'login' %}">log-in for further options</a>
                 {% endif %}
-                
+              </div>  
                 <div class="modal fade" id="monthlyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
