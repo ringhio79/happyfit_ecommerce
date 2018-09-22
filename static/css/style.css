@@ -7,7 +7,7 @@
     }
 }
 
-@media (min-width: 851px) and (max-width: 1800px) {
+@media (min-width: 851px) {
     .list-schedule {
         display: none;
     }
@@ -16,20 +16,87 @@
     }
 }
 
+@media (max-width: 730px){
+    .panel {
+        width: 100%;
+    }
+    .panel-body {
+        padding: 10px 20px;
+    }
+    
+     body {
+        background-size: contain;
+    }
+    
+    .home-bottom {
+        margin-top: 25vh;
+    }
+    .motto {
+        margin-top: 10vh;
+    }
+}
+
+@media (min-width: 731px) {
+    .panel {
+        width: 80%;
+        margin-left: 10%;
+    }
+    body {
+        background-size: cover;
+    }
+    
+    .home-bottom {
+        margin-top: 65vh;
+    }
+    
+    .motto {
+        margin-top: 30vh;
+    }
+    
+    .home-border {  
+        border-left: solid;
+        border-right: solid;
+        border-color: #149c82;
+        border-width: thin;
+    }
+}
+footer {
+    height: 50px;
+    background-color: #18bc9c;
+    text-align: right;
+    padding: 15px;
+    color: #ffffff;
+    
+}
+
+footer a {
+    color: #ffffff;
+    letter-spacing: 2px;
+}
+
+footer a:hover {
+    color: #2c3e50;
+}
+
+footer i{
+    color: #ffffff;
+    letter-spacing: 2px;
+}
+
+footer i:hover {
+    color: #2c3e50;
+}
+
 body {
-    /*margin-top: 30px;*/
+    margin-top: 30px;
     background-image: url("../media/images/adult-arm-art-326559.jpg");
-    background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
 .panel {
-    width: 80%;
-    margin-left: 10%;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    /*opacity: 0.93;*/
+        margin-top: 60px;
+        margin-bottom: 30px;
 }
 
 .panel-info {
@@ -104,13 +171,17 @@ body {
 
 /*---------home page------------*/
 
-.motiviation {
+.motto {
+    position: fixed;
     color: #ffffff;
-    height:150px; 
-    width: 100%;
-    margin: 100px;
-    /*padding-left: px;*/
+    margin-left: 40px;
+    margin-bottom: 50px;
     text-align: left;
+}
+
+.motto img {
+    width: 50vw;
+    height: auto;
 }
 
 H1 {
@@ -119,8 +190,9 @@ H1 {
 }
 
 .home-bottom {
+    position: relative;
     background-color: #f5f5f5;
-    margin-bottom: 31px;
+    margin-bottom: 15px;
 }
 
 .home-parent {
@@ -135,13 +207,11 @@ H1 {
 .home-col {
     padding: 5px 40px;
 }
-    
-.border {  
-    border-right: solid;
-    border-color: #149c82;
-    border-width: thin;
-}
 
+.home-col a {
+    margin-bottom: 15px;
+}
+    
 /*---------subscriptions page------------*/
 .subs-image {
     width: 100%;
