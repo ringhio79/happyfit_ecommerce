@@ -6,7 +6,7 @@ from payments.forms import CardForm
 from .models import Profile
 from events.models import Ticket, Event, Booking
 from django.conf import settings
-import datetime
+from datetime import date
 import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -62,7 +62,7 @@ def user_profile(request):
         if request.user.profile.subscription_id:
             subscription = stripe.Subscription.retrieve(request.user.profile.subscription_id)
             end_date_str = subscription.current_period_end
-            end_date = datetime.datetime.fromtimestamp(float(end_date_str))
+            end_date = date.fromtimestamp(float(end_date_str))
             
             return render(request, "accounts/user_profile.html", {"membership_no": membership_no, "subscription":subscription, "end_date":end_date, "member": member, "tickets":tickets, "bookings": bookings})
         else: 
