@@ -8,7 +8,7 @@
                 <div class="panel-body">
                         {% if request.user.profile %}
                         <div class="row">
-                                <div class="col-sm-12 col-md-12">
+                                <div class="col-sm-12 col-md-4 col-md-offset-4">
                                         <img class="img-profile" src="{{MEDIA_URL}}{{request.user.profile.profile_image}}">
                                 </div>
                                 <div class="col-sm-12 col-md-6">
@@ -18,6 +18,10 @@
                                                         <td>{{ request.user.profile.first_name }} {{ request.user.profile.last_name }}</td>
                                                 </tr>
                                                 <tr>
+                                                        <th>Membership No:</th>
+                                                        <td>{{ membership_no }}</td>
+                                                </tr>
+                                                <tr>
                                                         <th>Gender:</th>
                                                         <td>{{ request.user.profile.gender }}</td>
                                                 </tr>
@@ -25,16 +29,14 @@
                                                         <th>Address:</th>
                                                         <td>{{ request.user.profile.house_no }}, {{ request.user.profile.street_name }}<br>{{ request.user.profile.town_or_city }}<br>{{ request.user.profile.postcode }}<br>{{ request.user.profile.country }}</td>
                                                 </tr>
-                                                <tr>
-                                                        <th>Membership No:</th>
-                                                        <td>{{ membership_no }}</td>
-                                                </tr>
                                         </table>
+                                        <a href="{% url 'edit_profile' user.profile.id %}" class="btn btn-default">Edit Profile</a>
+                        
                                 </div>
+                                {% if request.user.profile.subscription_id %}
                                 <div class="col-sm-12 col-md-6">
-                                        {% if request.user.profile.subscription_id %}
+                                        {%if subscription.status == "active" %}
                                         <table class="table profile-user-details ">
-                                                if request.user.profile.subscription.status == 
                                                 <tr>
                                                         <th>Subscription:</th>
                                                         <td>{{subscription.plan.id}}</td>
@@ -48,47 +50,75 @@
                                                         <td>{{end_date}}</td>
                                                 </tr>
                                         </table>
-                                        
-                                        
-                                        
-                                        <p> you are subscribed to: {{subscription.plan.id}}</p>
-                                        <p> subscription end date {{end_date}}</p>
-                                        <a href="{% url 'unsubscribe' %}" class="btn btn-default">Cancel subscription</a>
-                                        <a href="{% url 'view_subscription' %}" class="btn btn-default">Subscription Detail</a>
-                                        {% else %}
-                                        <p>No current active subscriptions. Click on the link below to see subscription options:</p>
-                                        <a href="{% url 'subscriptions' %}" class="btn btn-default">Go to subscriptions</a>
+                                        {% elif subscription.status == "canceled" %}
+                                        <p>Your {{subscription.plan.id}} has expired.</p>
+                                        <p>For further details on our subscription plans and subscribe, please go to our <a href="{% url 'subscriptions' %}">subscriptions page.</a></p>
                                         {% endif %}
+                                        <a href="{% url 'unsubscribe' %}" class="btn btn-default">Cancel subscription</a>
+                        
+                                {% else %}
+                                <p>You don't currently have an active subscription. For further details on our subscription plans please go to <a href="{% url 'subscriptions' %}">SUBSCRIPTIONS</a>.</p>
+                                {% endif %}
                                 </div>
+                                
+                               
+
                         </div>
+ <hr class="hr-style">
+                                <h4>Booking History:</h4>
+                                
+                                {% for booking in bookings %}
+                                <div class="dropdown">
+                                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Booking ref. {{booking.id}} booking date: {{booking.date}}
+                                    <span class="caret"></span>
+                                  </button>
+                                  {% for ticket in tickets %}
+                                        {% if ticket.booking.id == booking.id %}
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li><p>Ticket No. {{ticket.id}}</p>
+                                                <p>Event: {{ticket.event.event_name}} Participant: {{ticket.first_name}} {{ticket.last_name}}</p>
+                                        {%endif%}
+                                        {%endfor%}</li>
+                                  </ul>
+                                </div>
+                                {% endfor %}
+                                
+                                
+        
+                                {% for booking in bookings %}
+                                <p>Booking ref. {{booking.id}} booking date: {{booking.date}}</p>
+                                        {% for ticket in tickets %}
+                                        {% if ticket.booking.id == booking.id %}
+                                        <p>Ticket No. {{ticket.id}}</p>
+                                        <p>Event: {{ticket.event.event_name}} Participant: {{ticket.first_name}} {{ticket.last_name}}</p>
+                                        {%endif%}
+                                        {%endfor%}
+                                        <br
+                                {% endfor %}
+                                
+        
+        
+        
+        
+                                <h4>working code</h4>
+                                {% for ticket in tickets%}
+                                <p>booking no. {{ticket.booking.id}}</p>
+                                <p>Event: {{ticket.event.event_name}} Member: {{ticket.member}}</p>
+                                <p>Ticket No. {{ticket.id}} Participant: {{ticket.first_name}} {{ticket.last_name}}</p>
+                                <hr> {% endfor%}
+
+                        
                         {% else %}
                         <p>You have not yet completed your profile, please click on the link below to complete your profile </p>
-                        <a href="{% url 'add_profile' %}" class="btn btn-default">Add Profile</a> {% endif%}
+                        <a href="{% url 'add_profile' %}" class="btn btn-default">Add Profile</a>
+                        {% endif%}
+                        
 
-                        <hr class="hr-style">
-
-
-
-                        <h4>testing code</h4>
-
-                        {% for booking in bookings %}
-                        <p>booking no.{{booking.id}} booked on {{booking.date}}</p>
-                        {{booking.booking_member}} {% endfor %}
-
-
-
-
-                        <h4>working code</h4>
-                        {% for ticket in tickets%}
-                        <p>booking no. {{ticket.booking.id}}</p>
-                        <p>Event: {{ticket.event.event_name}} Member: {{ticket.member}}</p>
-                        <p>Ticket No. {{ticket.id}} Participant: {{ticket.first_name}} {{ticket.last_name}}</p>
-                        <hr> {% endfor%}
-
+                        
 
                 </div>
         </div>
-
 </div>
 
 {% endblock %}
