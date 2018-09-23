@@ -312,14 +312,21 @@ H1 {
 .img-profile {
     border-radius: 50%;
     height: auto;
-    width: 100%;
+    width: 50%;
     object-fit: cover;
-    
 }
 
 .profile-user-details tr th {
     text-align: left;
 }
+
+/*.account {*/
+/*    border-bottom: solid;*/
+/*    border-width: thin;*/
+/*    border-bottom-color: #18bc9c;*/
+/*    margin-top: 15px;*/
+/*    margin-bottom: 15px;*/
+/*}*/
 
 
 

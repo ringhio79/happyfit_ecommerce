@@ -1,20 +1,19 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Booking Ref {{booking_no}}</h3>
+        </div>
+        <div class="panel-body">
+            <h5>Memeber's reference: {{booking.booking_member}}</h5>
+            <p>Booked on: {{booking.date}}</p>
 
-
-{% block content %}
-
-<p>Booking details page</p>
-
-<h5>booking Ref{{booking.id}}</h5>
-<p>on: {{booking.date}}</p>
-
-{%for ticket in tickets%}
-<p>ticket no. {{ticket.id}}</p>
-<p>Member Name: {{ ticket.member}}</p> 
-<p>Participant: {{ticket.first_name}}{{ticket.last_name}}</p>
-<hr>
-{%endfor%}
-
+            {%for ticket in tickets%}
+            <p>Ticket no. {{ticket.id}} - {{ticket.event.event_name}}- Participant: {{ticket.first_name}} {{ticket.last_name}}</p>
+            <hr> {%endfor%}
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}
