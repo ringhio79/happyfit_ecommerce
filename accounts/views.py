@@ -63,8 +63,15 @@ def user_profile(request):
             subscription = stripe.Subscription.retrieve(request.user.profile.subscription_id)
             end_date_str = subscription.current_period_end
             end_date = date.fromtimestamp(float(end_date_str))
+            start_date_str = subscription.current_period_start
+            start_date = date.fromtimestamp(float(start_date_str))
+            if subscription.canceled_at:
+                cancelled_at_str = subscription.canceled_at
+                cancelled_on = date.fromtimestamp(float(cancelled_at_str))
+            else:
+                cancelled_on = "not_applicable"
             
-            return render(request, "accounts/user_profile.html", {"membership_no": membership_no, "subscription":subscription, "end_date":end_date, "member": member, "tickets":tickets, "bookings": bookings})
+            return render(request, "accounts/user_profile.html", {"membership_no": membership_no, "subscription":subscription, "end_date":end_date, "start_date":start_date, "cancelled_on":cancelled_on, "member": member, "tickets":tickets, "bookings": bookings})
         else: 
             
             return render(request, "accounts/user_profile.html", {"membership_no": membership_no, "member": member, "tickets": tickets})

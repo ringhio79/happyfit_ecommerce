@@ -8,10 +8,11 @@
                 <div class="panel-body">
                         {% if request.user.profile %}
                         <div class="row account">
-                                <div class="col-sm-12 col-md-6 ">
+                                <h4>Member details:</h4>
+                                <div class="col-sm-12 col-md-4 ">
                                         <img class="img-profile" src="{{MEDIA_URL}}{{request.user.profile.profile_image}}">
                                 </div>
-                                <div class="col-sm-12 col-md-6">
+                                <div class="col-sm-12 col-md-8">
                                         <table class="table profile-user-details ">
                                                 <tr>
                                                         <th>Full name:</th>
@@ -36,8 +37,10 @@
                         </div>
                         <hr class="hr-style">
                         <div class="row account">
-                                {% if request.user.profile.subscription_id %}
+                                <h4>Subscription details:</h4>
+                                
                                 <div class="col-sm-12 col-md-12 ">
+                                {% if request.user.profile.subscription_id %}
                                         {%if subscription.status == "active" %}
                                         <table class="table profile-user-details ">
                                                 <tr>
@@ -45,36 +48,57 @@
                                                         <td>{{subscription.plan.id}}</td>
                                                 </tr>
                                                 <tr>
+                                                        <th>Status:</th>
+                                                        <td>{% if cancelled_on == "not_applicable" %} Active {%else %}Cancelled on {{cancelled_on}} {%endif%}</td>
+                                                </tr>
+                                                <tr>
                                                         <th>Valid From:</th>
-                                                        <td>tbd</td>
+                                                        <td>{{start_date}}</td>
                                                 </tr>
                                                 <tr>
                                                         <th>Valid till:</th>
                                                         <td>{{end_date}}</td>
                                                 </tr>
+                                                <tr>
+                                                        <th>Auto-Renew on expiry:</th>
+                                                        <td>{% if subscription.cancel_at_period_end == False %}Yes {%else %}No{%endif%}</td>
+                                                </tr>
+                                                
                                         </table>
+                                                {% if cancelled_on == "not_applicable" %}
+                                                <a href="{% url 'unsubscribe' %}" class="btn btn-default pull-right">Cancel subscription</a>
+                                                {% endif %}
                                         {% elif subscription.status == "canceled" %}
                                         <p>Your {{subscription.plan.id}} has expired.</p>
-                                        <p>For further details on our subscription plans and subscribe, please go to our <a href="{% url 'subscriptions' %}">subscriptions page.</a></p>
+                                        <p>For further details on our subscription plans and subscribe, please go to our subscriptions page.</p>
+                                        <a href="{% url 'subscriptions' %}"class="btn btn-default pull-right">Subscription</a>
                                         {% endif %}
-                                        <a href="{% url 'unsubscribe' %}" class="btn btn-default pull-right">Cancel subscription</a> {% else %}
-                                        <p>You don't currently have an active subscription. For further details on our subscription plans please go to <a href="{% url 'subscriptions' %}">SUBSCRIPTIONS</a>.</p>
-                                </div>
+                                {% else %}
+                                <p>You don't currently have an active subscription. For further details on our subscription plans please go to our subscriptions page.</p> <a href="{% url 'subscriptions' %}"class="btn btn-default pull-right">Subscription</a>
                                 {% endif %}
+                                </div>
                         </div>
                         <hr class="hr-style">
+                        
                         <div class="row account">
+                                <h4>Booking History:</h4>
                                 <div class="col-sm-12">
-                                        <h4>Booking History:</h4>
-                                        {% for booking in bookings %}
-                                        <p>Booking no. {{booking.id}} booking date: {{booking.date}}</p>
-                                        <a href="{% url 'booking_details' booking.id %}">Click here for details</a>
-                                        {% endfor %}
+                                        {% if bookings %}
+                                                {% for booking in bookings %}
+                                                <p>Booking no. {{booking.id}} booking date: {{booking.date}}</p>
+                                                <a href="{% url 'booking_details' booking.id %}">Click here for details</a>
+                                                {% endfor %}
+                                        {% else%} 
+                                        <p>You have not yet booked any events or classes.  For a list of classes and events please go to our events page.</p>
+                                        <a href="{% url 'events_list' %}"class="btn btn-default pull-right">Events</a>
+                                        {%endif%}
                                 </div>
                         </div>
-                        <hr class="hr-style"> {% else %}
+                        <hr class="hr-style">
+                        {% else %}
                         <p>You have not yet completed your profile, please click on the link below to complete your profile </p>
-                        <a href="{% url 'add_profile' %}" class="btn btn-default">Add Profile</a> {% endif%}
+                        <a href="{% url 'add_profile' %}" class="btn btn-default">Add Profile</a>
+                        {% endif%}
 
                 </div>
         </div>
