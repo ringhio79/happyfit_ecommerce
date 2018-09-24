@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load bootstrap_tags %}
+{% load staticfiles %}
 
 {% block content %}
 
@@ -26,13 +27,13 @@
                 {% endif %}
             </div>
             <div class="col-xs-12 col-sm-4 membership">
-                <img src="../static/media/images/active-aerobics-beautiful-903171.jpg" alt="membership">
+                <img src="{% static 'media/images/active-aerobics-beautiful-903171.jpg' %}" alt="membership">
             </div>
         </div>
         <hr class="hr-style">
         <div class="row">
             <div class="col-xs-12 col-sm-4 membership">
-                <img src="../static/media/images/machines-91849_1920.jpg" alt="membership">
+                <img src="{% static 'media/images/machines-91849_1920.jpg' %}" alt="membership">
             </div>
             <div class="col-xs-12 col-sm-8">
                 <h4>Lay-Z-Gym - Subscriptions</h4>

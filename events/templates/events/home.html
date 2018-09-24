@@ -1,18 +1,18 @@
 {% extends 'base.html' %} 
+{% load staticfiles %}
 
 
 {% block content %}
 <div class="row">
     <div class="motto">
-        <img src="../static/media/images/motto_no_outline.png" alt="motto"></img>
+        <img src="{% static 'media/images/motto_no_outline.png'%}" alt="motto"></img>
     </div>
 </div>
 
 <div class="container-fluid home-bottom">
     <div class="row home-parent">
         <div class="col-sm-12 col-md-4 home-col">
-            {% static 'images/Twitter.png' %}
-            <img src="{% static '/media/images/membership.png' %}" alt="subscription" height="75px" width="75px">
+            <img src="{% static 'media/images/membership.png' %}" alt="subscription" height="75px" width="75px">
             <h4>Subscriptions</h4>
             <div class=home-text>
             <p>Our flexible subscription options allow you to choose the right plan for your needs.  Whether you are an avid fitness junky, a busy mum looking to fit some classes around your busy schedule or a regular gym go-er we have the right plan for you. Please click on the link below for further information on each of our subscription options. </p>
@@ -29,7 +29,7 @@
             
         </div>
         <div class="col-sm-12 col-md-4 home-col">
-            <img src="{%static 'media/images/runner-stick-man.png%}" alt="membership" height="75px" width="75px">
+            <img src="{% static 'media/images/runner-stick-man.png' %}" alt="membership" height="75px" width="75px">
             <h4>About Us</h4>
             <div class=home-text>
             <p>Lay-Z-gym was founded by Raoul Hurst with an aim to make exercising less of a chore and more of a social experience.  Our instructors and trainers do their utmost to make you feel comfortable and to help you tailor your exercise regime to your specific needs while leaving all judgements at the door.  Join us and get to know a little more about each instructor.</p>
