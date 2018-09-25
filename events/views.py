@@ -89,10 +89,14 @@ def event_booking_confirm(request):
 
 def booking_details(request, id):
     booking = get_object_or_404(Booking, pk=id)
-    booking_no = "%05d" % booking.id
-    tickets = Ticket.objects.filter(booking=booking)
-    
-    return render(request, "events/booking_details.html", {"booking": booking, "booking_no": booking_no, "tickets": tickets})
+    if request.user != booking.booking_member:
+        message="You are not authorised to view this page."
+        return render(request, "accounts/custom_error.html", {"message":message})
+    else:
+        booking_no = "%05d" % booking.id
+        tickets = Ticket.objects.filter(booking=booking)
+        
+        return render(request, "events/booking_details.html", {"booking": booking, "booking_no": booking_no, "tickets": tickets})
     
     
     

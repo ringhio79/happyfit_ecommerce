@@ -31,7 +31,7 @@
                                                         <td>{{ request.user.profile.house_no }}, {{ request.user.profile.street_name }}<br>{{ request.user.profile.town_or_city }}<br>{{ request.user.profile.postcode }}<br>{{ request.user.profile.country }}</td>
                                                 </tr>
                                         </table>
-                                        <a href="{% url 'edit_profile' user.profile.id %}" class="btn btn-default pull-right">Edit Profile</a>
+                                        <a href="{% url 'edit_profile' user.profile.id %}" class="btn btn-success pull-right">Edit Profile</a>
 
                                 </div>
                         </div>
@@ -66,15 +66,15 @@
                                                 
                                         </table>
                                                 {% if cancelled_on == "not_applicable" %}
-                                                <a href="{% url 'unsubscribe' %}" class="btn btn-default pull-right">Cancel subscription</a>
+                                                <a href="{% url 'unsubscribe' %}" class="btn btn-success pull-right">Cancel subscription</a>
                                                 {% endif %}
                                         {% elif subscription.status == "canceled" %}
                                         <p>Your {{subscription.plan.id}} has expired.</p>
                                         <p>For further details on our subscription plans and subscribe, please go to our subscriptions page.</p>
-                                        <a href="{% url 'subscriptions' %}"class="btn btn-default pull-right">Subscription</a>
+                                        <a href="{% url 'subscriptions' %}"class="btn btn-success pull-right">Subscription</a>
                                         {% endif %}
                                 {% else %}
-                                <p>You don't currently have an active subscription. For further details on our subscription plans please go to our subscriptions page.</p> <a href="{% url 'subscriptions' %}"class="btn btn-default pull-right">Subscription</a>
+                                <p>You don't currently have an active subscription. For further details on our subscription plans please go to our subscriptions page.</p> <a href="{% url 'subscriptions' %}"class="btn btn-success pull-right">Subscription</a>
                                 {% endif %}
                                 </div>
                         </div>
@@ -90,14 +90,14 @@
                                                 {% endfor %}
                                         {% else%} 
                                         <p>You have not yet booked any events or classes.  For a list of classes and events please go to our events page.</p>
-                                        <a href="{% url 'events_list' %}"class="btn btn-default pull-right">Events</a>
+                                        <a href="{% url 'events_list' %}"class="btn btn-success pull-right">Events</a>
                                         {%endif%}
                                 </div>
                         </div>
                         <hr class="hr-style">
                         {% else %}
                         <p>You have not yet completed your profile, please click on the link below to complete your profile </p>
-                        <a href="{% url 'add_profile' %}" class="btn btn-default">Add Profile</a>
+                        <a href="{% url 'add_profile' %}" class="btn btn-success">Add Profile</a>
                         {% endif%}
 
                 </div>

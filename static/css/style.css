@@ -355,3 +355,12 @@ H1 {
     font-size: 5em;
 }
 
+/*---------booking details------------*/
+.booking-main {
+    text-align: right;
+}
+
+.bookings {
+    max-width: 70%;
+    margin-left: 15%;
+}

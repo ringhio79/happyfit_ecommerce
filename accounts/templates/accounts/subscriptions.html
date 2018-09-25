@@ -18,9 +18,9 @@
                 <p>Our classes and events are exclusively available to Lay-Z-Gym Members.  There is no cost to the membership, all you need to do is complete your online membership form providing your personal details and payment details. Your card will not be charged at this point but only when making a booking for an event or class.  Once you are a member you will be able to book classes/events for yourself and your guests with ease.  Should you also wish to make use of our other gym facilities please read on below about our subscriptions.</p>
                 {% if user.is_authenticated%}
                     {%if user.profile%}
-                    <a href="{% url 'user_profile' %}" class="btn btn-success btn-sm">My Account</a>
+                    <a href="{% url 'user_profile' %}" class="btn btn-success">My Account</a>
                     {% else %}
-                    <a href="{% url 'user_profile' %}" class="btn btn-success btn-sm">Complete Account</a>
+                    <a href="{% url 'user_profile' %}" class="btn btn-success">Create Account</a>
                     {% endif %}
                 {% else %}
                 <p>Please <a href="{% url 'login' %}">log-in</a> if you wish to create a membership account.</p>
@@ -64,7 +64,7 @@
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#yearlyModal">
                             click here to purchase</button>
                     {%else%}
-                    <p><span style="color:#18bc9c">* Please complete your member account to continue further.</span></p>
+                    <p>* Please complete your member account for more options.</p>
                     {%endif%}
                 {%else%}
                 <a href="{% url 'login' %}">log-in for further options</a>
@@ -113,7 +113,7 @@
                     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#monthlyModal">
                             click here to purchase</button>
                     {%else%}
-                    <p><span style="color:#18bc9c">* Please complete your member account to continue further.</span></p>
+                    <p>* Please complete your member account for more options.</p>
                     {%endif%}
                 {%else%}
                 <a href="{% url 'login' %}">log-in for further options</a>

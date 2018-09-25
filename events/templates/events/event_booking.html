@@ -36,13 +36,13 @@
                         <div class="col-md-12">
                             <br><p><span style="font-weight: bold">Guest:</span> {{ticket}}:</p>
                             <p><span style="font-weight: bold">First name:</span> <input class="custom-input" type="text" name="first_name_{{ticket}}" required>
-                            <span style="font-weight: bold">Last name:</span> <input class="custom-input" type="text" name="last_name_{{ticket}}" required></p>
+                            <span style="font-weight: bold">Last name:</span> <input class="custom-input" type="text" name="last_name_{{ticket}}" requiredonfi></p>
                         </div>
                         {% endfor %}
                     {% endif %}
                 </div>
                 <div class="col-md-12" align="right">
-                    <input class="btn btn-success " type="submit" value="Confirm" />
+                    <input class="btn btn-success " type="submit" value="Purchase" />
                     <a href="{%url 'events_list'%}" class="btn btn-success">Cancel</a>
                 </div>
     
