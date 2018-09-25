@@ -74,7 +74,7 @@ def user_profile(request):
             return render(request, "accounts/user_profile.html", {"membership_no": membership_no, "subscription":subscription, "end_date":end_date, "start_date":start_date, "cancelled_on":cancelled_on, "member": member, "tickets":tickets, "bookings": bookings})
         else: 
             
-            return render(request, "accounts/user_profile.html", {"membership_no": membership_no, "member": member, "tickets": tickets})
+            return render(request, "accounts/user_profile.html", {"membership_no": membership_no, "member": member, "bookings":bookings, "tickets": tickets})
     else:
         return render(request, "accounts/user_profile.html")
 
