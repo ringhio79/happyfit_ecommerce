@@ -15,9 +15,12 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 def home(request):
     return render(request, "events/home.html")
     
+def about(request):
+    return render(request, "events/about.html")    
+    
 def class_schedule(request):
     return render(request, "events/class_schedule.html")
-    
+
 def events_list(request):
     events_list = Event.objects.all()
     category_filter = CategoryFilter(request.GET, queryset=events_list)
@@ -45,7 +48,7 @@ def event_booking(request):
 # ------------create tickets and booking --------------
 
 
-def event_booking_confirm(request):#create booking#
+def event_booking_confirm(request):
     if request.method == "GET":
         return redirect('/')
     
@@ -81,7 +84,8 @@ def event_booking_confirm(request):#create booking#
             return render(request, "events/booking_confirmation.html", {"member_first_name": member_first_name, "member_last_name": member_last_name, "quantity": quantity, "event":event, "booking_no": booking_no})
         
         else:
-            return HttpResponse("Charge Not Paid")
+            message = "Charge Not Paid"
+            return render(request, "accounts/custom_error.html", {"message":message})
 
 def booking_details(request, id):
     booking = get_object_or_404(Booking, pk=id)

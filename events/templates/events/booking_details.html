@@ -7,6 +7,7 @@
         <div class="panel-body">
             <h5>Memeber's reference: {{booking.booking_member}}</h5>
             <p>Booked on: {{booking.date}}</p>
+            <p>{{event.event_name}}</p>
 
             {%for ticket in tickets%}
             <p>Ticket no. {{ticket.id}} - {{ticket.event.event_name}}- Participant: {{ticket.first_name}} {{ticket.last_name}}</p>

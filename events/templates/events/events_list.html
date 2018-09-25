@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}{% load staticfiles %}
 
 <div class="container">
     <div class="panel panel-success">
@@ -11,9 +11,9 @@
                 <div class="col-md-6">
                     <div id="carousel-events" class="slide" data-ride="carousel">
                     <!-- Wrapper for slides -->
-                        <div class="carousel-inner" role="listbox">
+                        <div class="carousel-inner events" role="listbox">
                             <div class="item active">
-                                <img src="../static/media/images/active-aerobics-beautiful-903171.jpg" alt="one">
+                                <img src="{% static 'media/images/team.jpg' %}" alt="one">
                                 <div class="carousel-caption">
                                     Team
                                 </div>

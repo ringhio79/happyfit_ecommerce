@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% load staticfiles %} {% block content %}
+
+
+<div class="container">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">About Us</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row about-top">
+                <div class="col-sm-12 col-md-6">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner about-us" role="listbox">
+                            <div class="item active">
+                                <img src="{% static 'media/images/pool.jpg' %}" alt="pool">
+                            </div>
+                            <div class="item">
+                                <img src="{% static 'media/images/treadmills.jpg' %}" alt="threadmills">
+                            </div>
+                            <div class="item">
+                                <img src="{% static 'media/images/jacuzzi.jpg' %}" alt="jacuzzi">
+                            </div>
+                            <div class="item">
+                                <img src="{% static 'media/images/sauna.jpg' %}" alt="sauna">
+                            </div>
+                            <div class="item">
+                                <img src="{% static 'media/images/rowing.jpg' %}" alt="rowing">
+                                </div>
+                            </div>
+                        <!-- Controls -->
+                        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <h4>The People</h4>
+                    <p>Lay-Z-Gym was founded by Henry James, in 1988 who was passionate about maintaining a healthy lifestyle and wanted to create a place for people of all fitness levels to feel comfortable and enjoy their workout.  Here at Lay-Z-Gym we makie it our mission to make sure you have everything you need for a holistic training session an/or fitness class. We want to give everyone the chance to live a fit and healthy life.</p>
+                </div>
+            </div>
+            <div class="row about-bottom">
+                <div class="col-sm-12 col-md-6">
+                    <h4>Address & Contact</h4>
+                    <p>Lay-Z-Gym<br>103, Fitness Street, <br>Winnersh Triange,<br>WN23 9PG,<br> Berkshire</p>
+                    <p><span style="bold">Tel:</span> (+44) 0198 763 398</p>
+                    <p><span style="bold">Email:</span> info@lay-z-gym.com</p>
+                    
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <h4>Follow us on social media</h4>
+                    <ul class="list-inline social-links">
+                        <li><a target="blank" href="www.twitter.com"><i class="fab fa-twitter"></i></a></li>
+                        <li><a target="blank" href="www.facebook.com"><i class="fab fa-facebook"></i></a></li>
+                        <li><a target="blank" href="www.instagram.com"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                    
+                </div>
+            </div>        
+        </div>
+    </div>
+</div>
+
+{% endblock %}

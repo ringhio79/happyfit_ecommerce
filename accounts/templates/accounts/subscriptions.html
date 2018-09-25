@@ -70,12 +70,12 @@
                 <a href="{% url 'login' %}">log-in for further options</a>
                 {% endif %}
               </div>  
-                <div class="modal fade" id="yearlyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal fade" id="yearlyModal" tabindex="-1" role="dialog" aria-labelledby="myYearModalLabel">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h3 class="modal-title" id="myModalLabel">Lay-Z-Gym Yearly Subscription</h3>
+                        <h3 class="modal-title" id="yearlyModal">Lay-Z-Gym Yearly Subscription</h3>
                       </div>
                       <div class="modal-body">
                         By clicking on the confirm button below you are purchasing a full year's subscription to Lay-Z-Gym.  Your account will be debited for the amount of €100.00 and your subscription will be active immediately.  Your subscription will automatically be renewed in a year's time unless you unsubscribe before the expiry date.  
@@ -110,7 +110,7 @@
                     
                     <a href="{% url 'user_profile' %}" class="btn btn-success">view account details</a>
                     {% elif user.profile%}
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#yearlyModal">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#monthlyModal">
                             click here to purchase</button>
                     {%else%}
                     <p><span style="color:#18bc9c">* Please complete your member account to continue further.</span></p>
@@ -119,12 +119,12 @@
                 <a href="{% url 'login' %}">log-in for further options</a>
                 {% endif %}
               </div>  
-                <div class="modal fade" id="monthlyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal fade" id="monthlyModal" tabindex="-1" role="dialog" aria-labelledby="myMonthModalLabel">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h3 class="modal-title" id="myModalLabel">Lay-Z-Gym Monthly Subscription</h3>
+                        <h3 class="modal-title" id="monthlyModal">Lay-Z-Gym Monthly Subscription</h3>
                       </div>
                       <div class="modal-body">
                         By clicking on the confirm button below you are purchasing a monthly subscription to Lay-Z-Gym.  Your account will be debited for the amount of €10.00 and your subscription will be active immediately.  Your subscription will automatically be renewed on a monthly basis unless you unsubscribe before the expiry date.  
