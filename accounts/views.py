@@ -83,7 +83,7 @@ def edit_profile(request, id):
     
     if request.user.profile.id != profile.id:
         message="You are not authorised to view this page."
-        return render(request, "accounts/custom_error.html", {"message":message})
+        return render(request, "home/custom_error.html", {"message":message})
 
     else:
         if request.method == "POST":

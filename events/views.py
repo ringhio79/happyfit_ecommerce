@@ -12,12 +12,6 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 # Create your views here.
-def home(request):
-    return render(request, "events/home.html")
-    
-def about(request):
-    return render(request, "events/about.html")    
-    
 def class_schedule(request):
     return render(request, "events/class_schedule.html")
 
@@ -85,13 +79,13 @@ def event_booking_confirm(request):
         
         else:
             message = "Charge Not Paid"
-            return render(request, "accounts/custom_error.html", {"message":message})
+            return render(request, "home/custom_error.html", {"message":message})
 
 def booking_details(request, id):
     booking = get_object_or_404(Booking, pk=id)
     if request.user != booking.booking_member:
         message="You are not authorised to view this page."
-        return render(request, "accounts/custom_error.html", {"message":message})
+        return render(request, "home/custom_error.html", {"message":message})
     else:
         booking_no = "%05d" % booking.id
         tickets = Ticket.objects.filter(booking=booking)
