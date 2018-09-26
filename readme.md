@@ -11,9 +11,12 @@ The web app has been deployed on Heroku and may be accessed by clicking on this 
 
 The website would be used by fitness clients.  The web app offers various levels of access depending on the type of authentication and registration level:
 
-- Not authenticated: I can browse for information on the services provided but no account information or purchasing options are provided .  Must log in for further options and information
+- Not authenticated: I can browse for information on the services provided but no account information or purchasing options are provided.  Must log in for further options and information
+-
 - Authenticated:  I can browse the website for information on the services provided and prices but cannot effect any purchases.  My account button will give me information about how to complete my registration and become a member.
-- Basic Registration: I can browse the website, buy a subscription or purchase class packs/special event tickets for personal use as well as additional guests. I can view my account details on the 'account' page, including past bookings (if any)
+-
+- Basic Registration: I can browse the website, buy a subscription or purchase class packs/special event tickets for personal use as well as additional guests. I can view my account details on the 'account' page, including past bookings (if any).
+
 - Subscripbed user: I can get information on all classes and events.  Scheduled classes are free but I have the option to purchase tickets to special events for personal use and for additional guests.  I can also view and manage my account from the 'account' page. 
 
 
@@ -21,34 +24,69 @@ This section is also where you would share links to any wireframes, mockups, dia
 
 ## Features
 
-The application is built with two apps, Accounts and Events.  The accounts app handles the features related to authentication, membership and subscription while the Events app handles the events and services provided by the company.
+The application is built with three apps, Home, Accounts and Events.  The accounts app handles the features related to authentication, membership and subscription while the Events app handles the events and services provided by the company.
 
-### Accounts
-- User login - allows users to create a log in account using just username, email and password.  Users are given the option whether they want to complete the regisgtration process immediately or return to it at a later stage.
+### Home app
+
+- The Home app is used to render pages that are generic to the application i.e. Home, About Us and the Custom-Error html pages.
+
+### Accounts app
+- User login: allows users to create a log in account using just username, email and password.  Users are given the option whether they want to complete the regisgtration process immediately or return to it at a later stage.
 
 - Registration/Profile - by completing the registration process the user also provides their payment details.  The payment details are sent to Stripe which in turn returns a Stripe ID.  The Stripe ID is stored in the user's profile but not credit card details are kept in the database. 
 
-- Automated payments - The Stripe ID enables the user to make purchases automatically without having to fill in payment details for every transaction.
+- Automated payments:  The Stripe ID enables the user to make purchases automatically without having to fill in payment details for every transaction.
 
-- Subscriptions - A registered user can sign up for a yearly subscription or monthly subscription.  This is done by using the Stripe ID to take payments on a yearly or monthly basis respectively.  Subscription details are also visible in the accounts page.
+- Subscriptions: A registered user can sign up for a yearly subscription or monthly subscription.  This is done by using the Stripe ID to take payments on a yearly or monthly basis respectively.  Subscription details are also visible in the accounts page. Subscription information is accessed via the Stripe API.
 
-### Events
-- 
+### Events app
+- Events: Events can be created via the django admin panel.  An event represents a service, group-class package or special event, which users can purchase tickets for.  Each event has a capacity which will determine the maximum no. of tickets that can be purchased for an event.
 
-For some/all of your features, you may choose to reference the specific project files that implement them, although this is entirely optional.
+- Tickets:  Tickets can be purchased directly online by registered users.  The number of tickets available for an event is displayed in the events details page.  A user can also purchase tickets for guests in which case they must provide guests' details before confirming their purchase. Tickets are linked to a booking via a booking reference no. 
 
-In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
+- Bookings:  Bookings are created at point of purchase together with the tickets.  These are linked to each other with the use of foreign keys.  A booking history can be viewed in the 'account' page.
 
-### Features Left to Implement
-- Another feature idea
+### Filter by Category
+
+And additional featur availale on the Events list page is the Filter by Category. The filter feature was implemented using the django filter library by creating a filter.py using the Event model and category field and then using the filter in the events_list function in views.py.  This allows users to filter the events by the predifined categories rather than using a text search thereby making it easier to find relevant events.
+
+### Conditional Views
+
+The web app is designed to display information depending on the type of user who  is logged in.  The pages which use conditional viewing are based on user type are:
+- Subscription
+- Event Details
+- Account
+
+Further details on the content displayed for each user type can be found in the supportingdocuments folder.
+
+### Potential expansion
+The web app is complete as per the required featurs however there is room for expansion if desired. As the company grows it may wish to allow intructors to have access to manage their events.
+
+- Instructors app - Instructors would have privilidged access to be able to create their own events and review tickets sold, participants etc. 
 
 ## Technologies Used
 
-In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
+## Built with
 
-- [JQuery](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation.
+### Frameworks
+- [Django Web Framework](https://www.djangoproject.com/)
+    - to creating the base web framework, templates
+- [Bootstrap](https://getbootstrap.com/)
+    - to create additional layout and styling features as well as responsive features using javascript components
+- [Bootswatch Flatly Theme](https://bootswatch.com/3/flatly/)
+    - used to provide a themed html components to be used and customised as necessary
 
+### Languages
+- [Python3](https://www.python.org/)
+    - to create functionality, render templates write to database
+- HTML & CSS
+    - to create layout and styling of front end
+
+### Databases
+- [SQLite Database](https://www.sqlite.org/index.html)
+    - used in dev environment
+- [PostgreSQL Database](https://www.postgresql.org/)
+    - used in prod environment
 
 ## Testing
 

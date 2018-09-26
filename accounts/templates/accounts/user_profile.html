@@ -49,7 +49,7 @@
                                                 </tr>
                                                 <tr>
                                                         <th>Status:</th>
-                                                        <td>{% if cancelled_on == "not_applicable" %} Active {%else %}Cancelled on {{cancelled_on}} {%endif%}</td>
+                                                        <td>{% if cancelled_on == "not_applicable" %} Active {%else %}<span style="color:#ff0000;">Cancelled on</span> {{cancelled_on}} {%endif%}</td>
                                                 </tr>
                                                 <tr>
                                                         <th>Valid From:</th>
