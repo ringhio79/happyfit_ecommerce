@@ -11,16 +11,13 @@ The web app has been deployed on Heroku and may be accessed by clicking on this 
 
 The website would be used by fitness clients.  The web app offers various levels of access depending on the type of authentication and registration level:
 
-- Not authenticated: I can browse for information on the services provided but no account information or purchasing options are provided.  Must log in for further options and information
+- Not authenticated: can browse for information on the services provided but no account information or purchasing options are provided.  Must log in for further options and information
 -
-- Authenticated:  I can browse the website for information on the services provided and prices but cannot effect any purchases.  My account button will give me information about how to complete my registration and become a member.
+- Authenticated:  can browse the website for information on the services provided and prices but cannot effect any purchases.  My account button will give me information about how to complete my registration and become a member.
 -
-- Basic Registration: I can browse the website, buy a subscription or purchase class packs/special event tickets for personal use as well as additional guests. I can view my account details on the 'account' page, including past bookings (if any).
+- Basic Registration: can browse the website, buy a subscription or purchase class packs/special event tickets for personal use as well as additional guests. I can view my account details on the 'account' page, including past bookings (if any).
 
-- Subscripbed user: I can get information on all classes and events.  Scheduled classes are free but I have the option to purchase tickets to special events for personal use and for additional guests.  I can also view and manage my account from the 'account' page. 
-
-
-This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser.
+- Subscripbed user: can get information on all classes and events.  Scheduled classes are free but I have the option to purchase tickets to special events for personal use and for additional guests.  I can also view and manage my account from the 'account' page. 
 
 ## Features
 
@@ -108,7 +105,19 @@ This will return a PASS for 4 tests:
 **Accounts** - View edit_Profile only for authorised user
 **Home** - Tests that the url for '/' resolves correctly
 
-Extensive manual testing has also been conduted to make sure that conditional content is viewed correctly for each type of user:
+
+### Manual testing
+Extensive manual testing has also been conduted to make sure that conditional content is viewed correctly for each type of user.  In order to test appropriately ficticious user accounts were created and used for testing.  The tables below provide user and access level information as well as expected content:
+
+**Users**
+
+| Username     | Authenticated   | Reg. Member    |  Subscription   | Bookings   | 
+|--------------|:---------------:|:--------------:|:---------------:|:----------:|
+| smoothray    | x               |                |                 |            |
+| hiplennon    | x               | x              | monthly         |            |
+| happyholly   | x               | x              |                 |            |
+| fizzyfitz    | x               | x              | yearly          |            |
+| bellehols    | x               | x              |                 | x          |
 
 **Logged out:**
     i. Able to browse through website for information
@@ -145,26 +154,95 @@ This web app has been designed to display on various screen sizes.  The variable
 
 ## Deployment
 
+This project is deployed and hosted on Heroku using Postgres Database and AWS S3 Bucket to host static files.  The process followed is detailed below:
+
+1. Create a new app on Heroku and select the Heroku Postgres Database
+
+2. Split the settings.py file into base.py, dev.py, prod.py.
+
+3. Update each of the files mentioned above to hold the relevant environment settings: 
+
+**base.py** - contains general settings which are used in development environment and production environment
+
+**dev.py** - the dev environment uses the local SQLite database and static and media files stored locally - this file is updated to point to the development tools
+
+ALLOWED_HOSTS = ['happyfit-gigi108.c9users.io']
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+**prod.py** - the dev environment uses Heroku's Postgres database AWS S3 Bucket - this file is updated to point to the development tools
+ALLOWED_HOSTS = ['happyfit-gigi108.c9users.io', 'ringhio79-lay-z-gym.herokuapp.com']
 
 
-This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
+DATABASES = {
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+}
 
-In particular, you should provide all details of the differences between the deployed version and the development version, if any, including:
-- Different values for environment variables (Heroku Config Vars)?
-- Different configuration files?
-- Separate git branch?
+AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+AWS_S3_HOST = 's3.eu-west-2.amazonaws.com'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+MEDIAFILES_LOCATION = 'media'
+MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_LOCATION = 'static'
+STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 
-In addition, if it is not obvious, you should also describe how to run your code locally.
+4. Add system settings to Heroku config vars
 
+AWS_ACCESS_KEY_ID = xxxxxxxxxxxxxxx
+AWS_SECRET_ACCESS_KEY = xxxxxxxxxxxxxxx
+AWS_STORAGE_BUCKET_NAME = ringhio79-lay-z-gym
+DATABASE_URL = 
+DJANGO_SETTINGS_MODULE = happyfit.settings.prod
+SECRET_KEY = postgres://vsoueeyumamjiw:cba5362067909f64efb77d96414ab902fcd91d180193a53334619055664f2d65@ec2-54-247-101-205.eu-west-1.compute.amazonaws.com:5432/db707n2u5mkjm4
+STRIPE_PUBLISHABLE_KEY = xxxxxxxxxxxxxxx
+STRIPE_SECRET_KEY = xxxxxxxxxxxxxxx
+
+5. Open terminal window and install:
+    $ sudo pip3 install psycopg2
+    $ sudo pip3 install dj-database-url
+    $ sudo pip3 install gunicorn
+    $ sudo pip3 install django-storages boto3
+
+6. Create requirements.txt Run command $ pip3 freeze --local > requirements.txt
+
+7. Create Procfile and custom_storages.py in root directory
+
+8. Collect static files and upload to S3 by running $ python3 manage.py collect static
+
+9. Check all settings then push to GitHub
+
+10. Connect Heroku to GitHub repository and hit deploy
+
+Once the deployment is complete you can open the app from Heroku
 
 ## Credits
 
-### Content
-- The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
+## Author
+This web app was completed by Giselle Baldacchino as the final project for the Code Institute Fullstack Developer bootcamp.
 
 ### Media
-- The photos used in this site were obtained from ...
+- The photos used in this site were obtained from: Pexels.com & Pixabay
+- Logo was created using BeFunky Designer and images were edited in BeFunky photo editor
+- .PNG icons were taken from and edit in Flaticon.com
 
 ### Acknowledgements
-
-- I received inspiration for this project from X
+- Guidance on how to use crispy forms and how to create a filter came from https://simpleisbetterthancomplex.com/
+- I would like to thank the teachers at Code Institure for their patience and guidance throughout the course.
