@@ -2,7 +2,7 @@
 
 *Ecommerce Web Application with User Authentication and Stripe payments and subscription options. 
 
-The web app is designed with a small fitness company in mind. The objective is to have an online presence and also enable customers to purchase services directly online.  It can easily be adapted to the use for personal trainsers who would also like to advertise their services but dont have a physical service location.  
+The web app is designed with a fictious small fitness company in mind. The objective is to have an online presence and also enable customers to purchase services directly online.  It can easily be adapted to the use for personal trainsers who would also like to advertise their services but dont have a physical service location.  
 
 ## Live Link 
 The web app has been deployed on Heroku and may be accessed by clicking on this link https://ringhio79-lay-z-gym.herokuapp.com/
@@ -86,38 +86,66 @@ The web app is complete as per the required featurs however there is room for ex
 - [PostgreSQL Database](https://www.postgresql.org/)
     - used in prod environment
 
+### Libraries
+- [Bootstrap forms](https://django-bootstrap-form.readthedocs.io/en/latest/)
+    - used to display forms
+    - 
+- [Crispy forms](https://django-crispy-forms.readthedocs.io/en/latest/)
+    - used to give flexibility in presenting forms
+
 ## Testing
 
-In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
+### Automated testing
 
-Whenever it is feasible, prefer to automate your tests, and if you've done so, provide a brief explanation of your approach, link to the test file(s) and explain how to run them.
+Some automated tests have been to the Accounts and Home App. These can be found in the tests.py file respectively.  To run the tests open the terminal and enter the command:
 
-For any scenarios that have not been automated, test the user stories manually and provide as much detail as is relevant. A particularly useful form for describing your testing process is via scenarios, such as:
+`$ python manage.py test <app name>`
 
-1. Contact form:
-    1. Go to the "Contact Us" page
-    2. Try to submit the empty form and verify that an error message about the required fields appears
-    3. Try to submit the form with an invalid email address and verify that a relevant error message appears
-    4. Try to submit the form with all inputs valid and verify that a success message appears.
+This will return a PASS for 4 tests:
 
-In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
+**Accounts** - ProfileForm validates correctly with all fields completed
+**Accounts** - ProfileForm validates correctly with only required fields completed
+**Accounts** - View edit_Profile only for authorised user
+**Home** - Tests that the url for '/' resolves correctly
 
-You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
+Extensive manual testing has also been conduted to make sure that conditional content is viewed correctly for each type of user:
 
-If this section grows too long, you may want to split it off into a separate file and link to it from here.
+**Logged out:**
+    i. Able to browse through website for information
+    ii. Able to view event prices and information & request log in for further info
+    iii. Registration process works
 
-| Tables        |Not registered    | Registered Member   | Subscribed Member    |
-| ------------- |:----------------:| -------------------:|:-------------------:|
-| col 3 is      |Button to complete registration process | $1600 |
-| col 2 is      | Button & Link to complete registration process      |   $12 |
-| zebra stripes |- Event Details
-                 - Pricing
-                 - Capacity
-                 - Link to complete member registration     |    $1 |
+**Logged in not a member:**
+    i. Able to browse through website for information
+    ii. Able to view event prices and information & request to complete member registration for futher options
+    iii. Able to view memeber's account page and details
+    iv. Able to view booking history (if applicable)
 
-
+**Logged in registered member no subscription:**
+    i. Able to browse through website for information
+    ii. Able to view event prices and information
+    iii. Able to purchase tickets for package classes & special events
+    iv. Able to view memeber's account page and details
+    v. Able to view booking history (if applicable)
+    
+**Logged in registered member with subscription:**
+    i. Able to browse through website for information
+    ii. Able to view event prices and information
+    iii. Able to purchase tickets special events only (package classes FOC)
+    iv. Able to view memeber's account page and details
+    v. Able to view subscription details and if active able to cancel
+    vi. Able to view booking history (if applicable)
+    
+**Forms & Inputs :**
+    i. log in, log out, registration, forgotten password - all forms work correctly and display appropriate error messages where applicable
+    ii. Forms have been tested for validation of fields
+    iii. In case of incorrect input a message pops up with hint for correction
+ 
+This web app has been designed to display on various screen sizes.  The variable view have been handled with a combination of bootstrap column settings in HTML and @media queries in CSS.
 
 ## Deployment
+
+
 
 This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
 

@@ -53,6 +53,7 @@ def event_booking_confirm(request):
         guests = range(1, quantity)
         member_first_name = request.user.profile.first_name
         member_last_name = request.user.profile.last_name
+        subscription = stripe.Subscription.retrieve(request.user.profile.subscription_id)
         total_in_cent = int(float(request.POST["grand_total"]))*100
         
         charge = stripe.Charge.create(

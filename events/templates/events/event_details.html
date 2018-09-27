@@ -32,7 +32,7 @@
           {% if user.is_authenticated %}
           
             {% if user.profile %}
-            <!-------- logged in & stripe user -------->
+            <!-------- logged in & registered member -------->
             <h4>Class Pack Price: €{{event.price}}</h4>
             <p> Class Capacity: {{event.capacity}}</p>
             <p> Places Available: {{available}}</p> 
@@ -52,7 +52,7 @@
               {% endif %}
             </form>
             {%else%}
-            <!-------- logged in but no profile/not member -------->
+            <!-------- logged in but not a member -------->
             <h4>Class Pack Price: €{{event.price}}</h4>
             <p> Class Capacity: {{event.capacity}}</p>
             <br><p>The Lay-Z-Gym fitness classes are exclusively available to gym members.  Membership is free of charge for registered users.  If you would like to complete the registration please <a href="{% url 'add_profile' %}">click here</a>.</p>
@@ -61,7 +61,7 @@
           <!-------- Not logged in -------->
           <h4>Class Pack Price: €{{event.price}}</h4>
             <p> Class Capacity: {{event.capacity}}</p>
-            <p>Kindly log in for further details and booking options.</p>
+            <p>Kindly <a href="{% url 'login' %}">log-in</a> for further details and booking options.</p>
           {% endif %}
         </div>
       </div>
@@ -84,7 +84,7 @@
               </div>
               
               {% elif user.profile%}
-              <!-------- logged in has stripe (no subscription) -------->
+              <!-------- logged & member (no subscription) -------->
               <h4>Class Pack Price: €{{event.price}}</h4>
               <p> Class Capacity: {{event.capacity}}</p>
               <p> Places Available: {{available}}</p> 
@@ -102,7 +102,7 @@
                 {% endif %}
               </form>
               {%else%}
-              <!-------- logged in but no profile/not member -------->
+              <!-------- logged in but not member -------->
               <h4>Class Pack Price: €{{event.price}}</h4>
               <p> Class Capacity: {{event.capacity}}</p> 
               <br><p>The Lay-Z-Gym fitness classes are exclusively available to gym members.  Membership is free of charge for registered users.  If you would like to complete the registration please <a href="{% url 'add_profile' %}">click here</a>.</p>
@@ -111,7 +111,7 @@
           <!-------- Not logged in -------->
           <h4>Class Pack Price: €{{event.price}}</h4>
           <p> Class Capacity: {{event.capacity}}</p>
-          <p>Kindly log in for further details and booking options.</p>
+            <p>Kindly <a href="{% url 'login' %}">log-in</a> for further details and booking options.</p>
           {% endif %}
         </div>
       </div>
