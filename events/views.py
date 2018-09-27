@@ -73,8 +73,7 @@ def event_booking_confirm(request):
                 last_name = request.POST['last_name_'+str(guest)]
               
                 create_ticket(member, event, first_name, last_name, booking)
-            print(event)
-                
+
             return render(request, "events/booking_confirmation.html", {"member_first_name": member_first_name, "member_last_name": member_last_name, "quantity": quantity, "event":event, "booking_no": booking_no})
         
         else:

@@ -48,7 +48,7 @@ The application is built with three apps, Home, Accounts and Events.  The accoun
 
 ### Filter by Category
 
-And additional featur availale on the Events list page is the Filter by Category. The filter feature was implemented using the django filter library by creating a filter.py using the Event model and category field and then using the filter in the events_list function in views.py.  This allows users to filter the events by the predifined categories rather than using a text search thereby making it easier to find relevant events.
+- And additional featur available on the Events list page is the Filter by Category. The filter feature was implemented using the django filter library by creating a filter.py using the Event model and category field and then using the filter in the events_list function in views.py.  This allows users to filter the events by the predifined categories rather than using a text search thereby making it easier to find relevant events.
 
 ### Conditional Views
 
@@ -62,11 +62,9 @@ Further details on the content displayed for each user type can be found in the 
 ### Potential expansion
 The web app is complete as per the required featurs however there is room for expansion if desired. As the company grows it may wish to allow intructors to have access to manage their events.
 
-- Instructors app - Instructors would have privilidged access to be able to create their own events and review tickets sold, participants etc. 
+- Instructors app - Instructors would have privilidged access to be able to create their own events, review tickets sold, participants etc. 
 
 ## Technologies Used
-
-## Built with
 
 ### Frameworks
 - [Django Web Framework](https://www.djangoproject.com/)
@@ -107,6 +105,17 @@ In addition, you should mention in this section how your project looks and works
 You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
 
 If this section grows too long, you may want to split it off into a separate file and link to it from here.
+
+| Tables        |Not registered    | Registered Member   | Subscribed Member    |
+| ------------- |:----------------:| -------------------:|:-------------------:|
+| col 3 is      |Button to complete registration process | $1600 |
+| col 2 is      | Button & Link to complete registration process      |   $12 |
+| zebra stripes |- Event Details
+                 - Pricing
+                 - Capacity
+                 - Link to complete member registration     |    $1 |
+
+
 
 ## Deployment
 
