@@ -12,9 +12,9 @@ The web app has been deployed on Heroku and may be accessed by clicking on this 
 The website would be used by fitness clients.  The web app offers various levels of access depending on the type of authentication and registration level:
 
 - Not authenticated: can browse for information on the services provided but no account information or purchasing options are provided.  Must log in for further options and information
--
+
 - Authenticated:  can browse the website for information on the services provided and prices but cannot effect any purchases.  My account button will give me information about how to complete my registration and become a member.
--
+
 - Basic Registration: can browse the website, buy a subscription or purchase class packs/special event tickets for personal use as well as additional guests. I can view my account details on the 'account' page, including past bookings (if any).
 
 - Subscripbed user: can get information on all classes and events.  Scheduled classes are free but I have the option to purchase tickets to special events for personal use and for additional guests.  I can also view and manage my account from the 'account' page. 
@@ -83,7 +83,7 @@ The web app is complete as per the required featurs however there is room for ex
 ### Libraries
 - [Bootstrap forms](https://django-bootstrap-form.readthedocs.io/en/latest/)
     - used to display forms
-    - 
+
 - [Crispy forms](https://django-crispy-forms.readthedocs.io/en/latest/)
     - used to give flexibility in presenting forms
 
@@ -105,6 +105,18 @@ This will return a PASS for 4 tests:
 
 ### Manual testing
 Extensive manual testing has also been conduted to make sure that conditional content is viewed correctly for each type of user.  In order to test appropriately ficticious user accounts have been created. Information on the users created and expected content visible can be found below:
+
+**Sample Users**
+
+| Username     | Authenticated   | Reg. Member    |  Subscription   | Bookings   | 
+|--------------|:---------------:|:--------------:|:---------------:|:----------:|
+| smoothray    | x               |                |                 |            |
+| hiplennon    | x               | x              | monthly         |            |
+| happyholly   | x               | x              |                 |            |
+| fizzyfitz    | x               | x              | yearly          |            |
+| bellehols    | x               | x              |                 | x          |
+
+*the password for each of the users above is p455w0rd1
 
 **Logged out:**
     i. Able to browse through website for information
@@ -136,24 +148,6 @@ Extensive manual testing has also been conduted to make sure that conditional co
     i. log in, log out, registration, forgotten password - all forms work correctly and display appropriate error messages where applicable
     ii. Forms have been tested for validation of fields
     iii. In case of incorrect input a message pops up with hint for correction
-
-**Sample Users**
-
-| Username     | Authenticated   | Reg. Member    |  Subscription   | Bookings   | 
-|--------------|:---------------:|:--------------:|:---------------:|:----------:|
-| smoothray    | x               |                |                 |            |
-| hiplennon    | x               | x              | monthly         |            |
-| happyholly   | x               | x              |                 |            |
-| fizzyfitz    | x               | x              | yearly          |            |
-| bellehols    | x               | x              |                 | x          |
-
-**Viewing Content**
-| URL name          | Authenticated                     | Registered Member                 |               Subscribed Member   |
-|-------------------|:---------------------------------:|:---------------------------------:|:---------------------------------:|
-| 'user_profile'    | Button to complete registration   | Member Details                    |                                   |
-|                   | process                           | Link to subscription page for dets|                                   |
-| 'subscriptions'   | x                                 | x                                 | monthly                           |
-| 'event_details'   | x                                 | x                                 |                                   |
 
 This web app has been designed to display on various screen sizes.  The variable view have been handled with a combination of bootstrap column settings in HTML and @media queries in CSS.
 
