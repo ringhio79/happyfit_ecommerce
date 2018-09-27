@@ -29,11 +29,8 @@ The application is built with three apps, Home, Accounts and Events.  The accoun
 
 ### Accounts app
 - User login: allows users to create a log in account using just username, email and password.  Users are given the option whether they want to complete the regisgtration process immediately or return to it at a later stage.
-
 - Registration/Profile - by completing the registration process the user also provides their payment details.  The payment details are sent to Stripe which in turn returns a Stripe ID.  The Stripe ID is stored in the user's profile but not credit card details are kept in the database. 
-
 - Automated payments:  The Stripe ID enables the user to make purchases automatically without having to fill in payment details for every transaction.
-
 - Subscriptions: A registered user can sign up for a yearly subscription or monthly subscription.  This is done by using the Stripe ID to take payments on a yearly or monthly basis respectively.  Subscription details are also visible in the accounts page. Subscription information is accessed via the Stripe API.
 
 ### Events app
@@ -107,17 +104,7 @@ This will return a PASS for 4 tests:
 
 
 ### Manual testing
-Extensive manual testing has also been conduted to make sure that conditional content is viewed correctly for each type of user.  In order to test appropriately ficticious user accounts were created and used for testing.  The tables below provide user and access level information as well as expected content:
-
-**Users**
-
-| Username     | Authenticated   | Reg. Member    |  Subscription   | Bookings   | 
-|--------------|:---------------:|:--------------:|:---------------:|:----------:|
-| smoothray    | x               |                |                 |            |
-| hiplennon    | x               | x              | monthly         |            |
-| happyholly   | x               | x              |                 |            |
-| fizzyfitz    | x               | x              | yearly          |            |
-| bellehols    | x               | x              |                 | x          |
+Extensive manual testing has also been conduted to make sure that conditional content is viewed correctly for each type of user.  In order to test appropriately ficticious user accounts have been created. Information on the users created and expected content visible can be found below:
 
 **Logged out:**
     i. Able to browse through website for information
@@ -149,7 +136,25 @@ Extensive manual testing has also been conduted to make sure that conditional co
     i. log in, log out, registration, forgotten password - all forms work correctly and display appropriate error messages where applicable
     ii. Forms have been tested for validation of fields
     iii. In case of incorrect input a message pops up with hint for correction
- 
+
+**Sample Users**
+
+| Username     | Authenticated   | Reg. Member    |  Subscription   | Bookings   | 
+|--------------|:---------------:|:--------------:|:---------------:|:----------:|
+| smoothray    | x               |                |                 |            |
+| hiplennon    | x               | x              | monthly         |            |
+| happyholly   | x               | x              |                 |            |
+| fizzyfitz    | x               | x              | yearly          |            |
+| bellehols    | x               | x              |                 | x          |
+
+**Viewing Content**
+| URL name          | Authenticated                     | Registered Member                 |               Subscribed Member   |
+|-------------------|:---------------------------------:|:---------------------------------:|:---------------------------------:|
+| 'user_profile'    | Button to complete registration   | Member Details                    |                                   |
+|                   | process                           | Link to subscription page for dets|                                   |
+| 'subscriptions'   | x                                 | x                                 | monthly                           |
+| 'event_details'   | x                                 | x                                 |                                   |
+
 This web app has been designed to display on various screen sizes.  The variable view have been handled with a combination of bootstrap column settings in HTML and @media queries in CSS.
 
 ## Deployment
