@@ -8,7 +8,7 @@ class Profile(models.Model):
         ('M', 'MALE'),
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
-    profile_image = models.ImageField(upload_to="avatars", null=True, blank=True, default="avatars/anonymous.png")
+    profile_image = models.ImageField(upload_to="avatars", null=False, blank=False)
     gender = models.CharField(max_length=1, choices=GENDER_LIST, blank=False, null=False)
     first_name = models.CharField(max_length=50, blank=False)
     last_name = models.CharField(max_length=50, blank=False)
