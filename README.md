@@ -5,7 +5,7 @@
 The web app is designed with a fictious small fitness company in mind. The objective is to have an online presence and also enable customers to purchase services directly online.  It can easily be adapted to the use for personal trainsers who would also like to advertise their services but dont have a physical service location.  
 
 ## Live Link 
-The web app has been deployed on Heroku and may be accessed by clicking on this link https://ringhio79-lay-z-gym.herokuapp.com/
+The web app has been deployed on Heroku and may be accessed by clicking on this link [Lay-Z-Gym](https://ringhio79-lay-z-gym.herokuapp.com/)
  
 ## UX
 
